@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using Chess;
 using System.Reflection;
 
 
 namespace Chess
 {
-    public class GameManager
+    public class GameManager : MonoBehaviour
     {
         public bool checkmate = false;
         public bool stalemate = false;
@@ -61,6 +62,7 @@ namespace Chess
         public GameManager()
         {
             // Initializing all the pieces
+            /*
             whitePawn1 = new Pawn(0, 1, whiteTeam);
             whitePawn2 = new Pawn(1, 1, whiteTeam);
             whitePawn3 = new Pawn(2, 1, whiteTeam);
@@ -99,6 +101,7 @@ namespace Chess
             whiteKnight2 = new Knight(6, 0, whiteTeam);
             blackKnight1 = new Knight(1, 7, blackTeam);
             blackKnight2 = new Knight(6, 7, blackTeam);
+            */
 
             emptyPiece = new ChessPiece(-1, -1, empty);
 
