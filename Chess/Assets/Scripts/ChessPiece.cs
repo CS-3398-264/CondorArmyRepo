@@ -1,45 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Chess;
 
-namespace Chess
-{
-    public class ChessPiece : MonoBehaviour
-    {
-        public int currentX;
-        public int currentY;
-        public int currentZ;
+public class ChessPiece : MonoBehaviour {
 
-        public int team;
-        public bool taken = false;
+    public int locationX;
+    public int locationZ;
 
-        public ChessPiece(int startingX, int startingZ, int team)
-        {
-            currentX = startingX;
-            currentY = 0;
-            currentZ = startingZ;
-            this.team = team;
-        }
+	// Use this for initialization
+	public void Setup () {
+        locationX = (int)Mathf.Round(transform.position.x);
+        locationZ = (int)Mathf.Round(transform.position.z);
+    }
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
 
-        public int[] getCurrentPosition()
-        {
-            int[] currentPos = new int[3];
-            currentPos[0] = currentX;
-            currentPos[1] = currentY;
-            currentPos[2] = currentZ;
-
-            return currentPos;
-        }
-
-        public void move(bool[,] moves)
-        {
-
-        }
-
-        public virtual bool[,] getPossibleMoves(ChessPiece[,] pieces)
-        {
-            return null;
-        }
+    void OnMouseUp() {
+        Debug.Log("Hi");
     }
 }

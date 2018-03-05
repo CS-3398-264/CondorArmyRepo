@@ -294,15 +294,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Bishop.cs" />
     <Compile Include="Assets\Scripts\ChessPiece.cs" />
-    <Compile Include="Assets\Scripts\Game.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\King.cs" />
-    <Compile Include="Assets\Scripts\Knight.cs" />
-    <Compile Include="Assets\Scripts\Pawn.cs" />
-    <Compile Include="Assets\Scripts\Queen.cs" />
-    <Compile Include="Assets\Scripts\Rook.cs" />
+    <Compile Include="Assets\Scripts\MouseManager.cs" />
+    <Compile Include="Assets\Scripts\temp\Bishop.cs" />
+    <Compile Include="Assets\Scripts\temp\ChessPiece.cs" />
+    <Compile Include="Assets\Scripts\temp\GameManager.cs" />
+    <Compile Include="Assets\Scripts\temp\King.cs" />
+    <Compile Include="Assets\Scripts\temp\Knight.cs" />
+    <Compile Include="Assets\Scripts\temp\Pawn.cs" />
+    <Compile Include="Assets\Scripts\temp\Queen.cs" />
+    <Compile Include="Assets\Scripts\temp\Rook.cs" />
+    <Compile Include="Assets\Scripts\UI Elements\ColorReferenceImage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

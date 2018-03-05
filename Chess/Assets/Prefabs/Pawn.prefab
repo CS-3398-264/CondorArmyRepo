@@ -19,11 +19,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4294692862136804}
-  - component: {fileID: 114936545583521276}
   - component: {fileID: 54614693507004824}
   m_Layer: 0
   m_Name: Pawn
-  m_TagString: Untagged
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,6 +37,7 @@ GameObject:
   - component: {fileID: 4902082651357560}
   - component: {fileID: 33403585091724952}
   - component: {fileID: 23763460626634110}
+  - component: {fileID: 64882260535333978}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1061591047813026}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4902082651357560}
@@ -128,19 +128,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114936545583521276
-MonoBehaviour:
+--- !u!64 &64882260535333978
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1061591047813026}
+  m_GameObject: {fileID: 1829676625588124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae5924d1e6484045994cd770eae228b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentX: 0
-  currentY: 0
-  currentZ: 0
-  team: 0
-  taken: 0
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 296311c212a9c7249a2efcf841885bbf, type: 3}
