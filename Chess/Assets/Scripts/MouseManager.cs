@@ -5,7 +5,7 @@ using UnityEngine;
 public class MouseManager : MonoBehaviour
 {
 
-    public GameObject selectedObject;
+    public static GameObject selectedObject;
     private Ray ray;
 
     // Use this for initialization
@@ -17,23 +17,20 @@ public class MouseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(ray, out hitInfo))
         {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            GameObject hitObject = hitInfo.transform.gameObject;
 
-            RaycastHit hitInfo;
-
-            if (Physics.Raycast(ray, out hitInfo))
-            {
-                GameObject hitObject = hitInfo.transform.gameObject;
-
-                SelectObject(hitObject);
-                //Debug.Log("Mouse is over: " + selectedObject);
-            }
-            else
-            {
-                ClearSelection();
-            }
+            SelectObject(hitObject);
+            //Debug.Log("Mouse is over: " + selectedObject);
+        }
+        else
+        {
+            ClearSelection();
         }
     }
 

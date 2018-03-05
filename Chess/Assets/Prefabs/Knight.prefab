@@ -56,6 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4128865588346502}
   - component: {fileID: 54299666766489022}
+  - component: {fileID: 114030504122832844}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Team1
@@ -104,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1638216834018930}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4547905705311452}
@@ -358,3 +359,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 3.2, z: 0.5}
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &114030504122832844
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1638216834018930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486490be412bc7f4c8346e323f665821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locationX: 0
+  locationZ: 0

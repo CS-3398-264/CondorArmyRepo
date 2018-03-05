@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChessPiece : MonoBehaviour {
+public abstract class ChessPiece : MonoBehaviour {
+
+    public Shader selectedShader;
 
     public int locationX;
     public int locationZ;
@@ -12,13 +14,12 @@ public class ChessPiece : MonoBehaviour {
         locationX = (int)Mathf.Round(transform.position.x);
         locationZ = (int)Mathf.Round(transform.position.z);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    void OnMouseUp() {
-        Debug.Log("Hi");
+    public void HightlightPiece()
+    {
+
     }
+
+    public abstract void OnMouseUp();
+
 }

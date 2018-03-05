@@ -13,5 +13,8 @@ public class King : ChessPiece {
 	    
 	}
 
-
+    public override void OnMouseUp()
+    {
+        Debug.Log("King was clicked!");
+    }
 }
