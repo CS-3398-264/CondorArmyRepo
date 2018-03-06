@@ -52,13 +52,14 @@ public class GameManager : MonoBehaviour {
     public ChessPiece team2_queen;
     public ChessPiece team2_king;
 
-    public ChessPiece[,] pieceLocations;
+    public static ChessPiece[,] pieceLocations;
 
+    public BoardManager bm;
     private MouseManager mm;
 
 	// Use this for initialization
 	void Start () {
-        // This is actually disgusting and we should have used a Scriptable Object
+        // This is actually disgusting and the Unity inspector doesn't support polymorphic arrays
         pieceLocations = new ChessPiece[8, 8] {
             { team1_rook1, team1_knight1, team1_bishop1, team1_queen, team1_king,  team1_bishop2, team1_knight2, team1_rook2 },
             { team1_pawn1, team1_pawn2,   team1_pawn3,   team1_pawn4, team1_pawn5, team1_pawn6,   team1_pawn7,   team1_pawn8 },
@@ -75,9 +76,13 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetMouseButtonUp(0))
+        if (mm.selectedObject != null)
         {
-            //mm.selectedObject;
+            if (mm.selectedObject.tag == "Team1" || mm.selectedObject.tag == "Team2")
+            {
+                List<Coordinates> moves = mm.selectedObject.GetComponent<ChessPiece>().GetMoves();
+                bm.HighlightTiles(moves);
+            }
         }
 	}
 }

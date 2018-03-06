@@ -23,6 +23,7 @@ public class Pawn : ChessPiece {
 
         if(firstMove) {
             finalMoves.Add(new Coordinates(0,2));
+            firstMove = false;
         }
 
         return finalMoves;

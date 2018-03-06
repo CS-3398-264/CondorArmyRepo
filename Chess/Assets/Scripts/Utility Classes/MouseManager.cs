@@ -17,20 +17,23 @@ public class MouseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hitInfo;
-
-        if (Physics.Raycast(ray, out hitInfo))
+        if (Input.GetMouseButtonUp(0))
         {
-            GameObject hitObject = hitInfo.transform.gameObject;
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            SelectObject(hitObject);
-            //Debug.Log("Mouse is over: " + selectedObject);
-        }
-        else
-        {
-            ClearSelection();
+            RaycastHit hitInfo;
+
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                GameObject hitObject = hitInfo.transform.gameObject;
+
+                SelectObject(hitObject);
+                //Debug.Log("Mouse is over: " + selectedObject);
+            }
+            else
+            {
+                ClearSelection();
+            }
         }
     }
 

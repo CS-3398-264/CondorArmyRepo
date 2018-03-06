@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class ChessPiece : MonoBehaviour {
 
     public TeamInfo teamInfo;
-
+    public GameManager gm;
     public Coordinates currentPos;
 
     private Renderer rend;
