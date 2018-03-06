@@ -10,7 +10,7 @@ public class King : ChessPiece {
 
     // Update is called once per frame
     void Update () {
-	    
+
 	}
 
     public override void OnMouseUp()

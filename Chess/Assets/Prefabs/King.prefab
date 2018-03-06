@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114453268465805056}
   m_Layer: 0
   m_Name: King
-  m_TagString: Untagged
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,5 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2e89a3eecca8b468cfd448b5653675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedShader: {fileID: 4800000, guid: 14209adb27a8e4b478ca37e2eaff104d, type: 3}
+  defaultShader: {fileID: 0}
   locationX: 0
   locationZ: 0

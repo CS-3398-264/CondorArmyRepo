@@ -10,14 +10,7 @@ public class Queen : ChessPiece {
 
     // Update is called once per frame
     void Update () {
-        if (MouseManager.selectedObject == gameObject)
-        {
-            gameObject.GetComponentInChildren<Renderer>().material.shader = selectedShader;
-        }
-        else
-        {
-            
-        }
+        
     }
 
     public override void OnMouseUp()

@@ -311,6 +311,7 @@
     <Compile Include="Assets\Scripts\Pawn.cs" />
     <Compile Include="Assets\Scripts\Queen.cs" />
     <Compile Include="Assets\Scripts\Rook.cs" />
+    <Compile Include="Assets\Scripts\TeamInfo.cs" />
     <Compile Include="Assets\Scripts\UI Elements\ColorReferenceImage.cs" />
   </ItemGroup>
   <ItemGroup>

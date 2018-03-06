@@ -5,7 +5,9 @@ licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - selectedShader: {fileID: 4800000, guid: 14209adb27a8e4b478ca37e2eaff104d, type: 3}
+  - defaultShader: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
