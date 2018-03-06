@@ -23,18 +23,39 @@ public class Pawn : ChessPiece {
 
         foreach (Coordinates move in knownMoves) {
             Coordinates coord = move;
+            Coordinates opt1 = new Coordinates(0, 1); //normal move
+            Coordinates opt2 = new Coordinates(0, 2); //first move option
 
             if (gameObject.tag == "Team2")
             {
                 coord = coord.flip();
             }
             coord = coord + currentPos;
+
             if (coord.x <= 7 && coord.x >= 0 && coord.z <= 7 && coord.z >= 0)
             {
-                finalMoves.Add(coord);
+                if (move == opt1)
+                {
+                    finalMoves.Add(coord);
+                }
+                else if (move == opt2)
+                {
+                    if (firstMove)
+                    {
+                        finalMoves.Add(coord);
+                    }
+                }
+                else
+                {
+                    if (GameManager.pieceLocations[coord.x, coord.z] != null && GameManager.pieceLocations[coord.x, coord.z].gameObject.tag == "Team2")
+                    {
+                        finalMoves.Add(coord);
+                    }
+                }
             }
         }
 
-        return finalMoves;
-    }
+
+            return finalMoves;
+        }
 }
