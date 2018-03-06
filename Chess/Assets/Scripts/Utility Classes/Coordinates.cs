@@ -51,8 +51,8 @@ public class Coordinates {
 
     public static bool operator !=(Coordinates a, Coordinates b) {
         if (a.x != b.x || a.z != b.z)
-            return false;
-        return true;
+            return true;
+        return false;
     }
 
     public Coordinates flip()

@@ -39,6 +39,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 while (to != from)
                 {
+                    Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
                     if (GameManager.pieceLocations[to.x, to.z] != null)
                     {
                         return true;
@@ -142,6 +143,7 @@ public abstract class ChessPiece : MonoBehaviour {
                 return false;
             }
         }
+        Debug.Log("Why am I ending up here?");
         return false;
     }
 

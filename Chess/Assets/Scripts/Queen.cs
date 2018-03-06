@@ -24,7 +24,7 @@ public class Queen : ChessPiece {
             if (coord.x <= 7 && coord.x >= 0 && coord.z <= 7 && coord.z >= 0)
             {
                 Debug.Log("Obstacle Checker: " + ObstacleChecker(coord, currentPos));
-                if (!ObstacleChecker(coord, currentPos))
+                if (ObstacleChecker(coord, currentPos))
                 {
                     finalMoves.Add(coord);
                 }

@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour {
 
     public BoardManager bm;
     private MouseManager mm;
+    private GameObject currentObject;
 
 	// Use this for initialization
 	void Start () {
@@ -79,11 +80,18 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         if (mm.selectedObject != null)
         {
-            bm.ResetBoard();
-            if (mm.selectedObject.tag == "Team1" || mm.selectedObject.tag == "Team2")
+            if (currentObject != mm.selectedObject)
             {
-                List<Coordinates> moves = mm.selectedObject.GetComponent<ChessPiece>().GetMoves();
-                bm.HighlightTiles(moves);
+                bm.ResetBoard();
+                if (mm.selectedObject.tag == "Team1")
+                {
+                    List<Coordinates> moves = mm.selectedObject.GetComponent<ChessPiece>().GetMoves();
+                    bm.HighlightTiles(moves);
+                }
+            }
+            else
+            {
+                currentObject = mm.selectedObject;
             }
         }
 	}
