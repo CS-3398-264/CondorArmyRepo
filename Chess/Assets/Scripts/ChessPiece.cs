@@ -29,6 +29,43 @@ public abstract class ChessPiece : MonoBehaviour {
         
     }
 
+    public bool ObstacleChecker(Coordinates to, Coordinates from) {
+        Coordinates diff = to - from;
+        if (diff.x > 0)
+        {
+            if (diff.z > 0)
+            {
+                for (int i = diff.x - 1; i >= 0; i--)
+                {
+                    if (GameManager.pieceLocations[to.x - i, to.z - i] != null)
+                    {
+                        return true;
+                    }
+                }
+            }
+            if (diff.z == 0)
+            {
+                for (int i = diff.x - 1; i >= 0; i--)
+                {
+                    if (GameManager.pieceLocations[to.x - i, to.z] != null)
+                    {
+                        return true;
+                    }
+                }
+            }
+            if (diff.z < 0)
+            {
+                for (int i = diff.z - 1; i < 0; i--)
+                {
+                    if (GameManager.pieceLocations[to.x - i, to.z + i] != null)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+
     public abstract List<Coordinates> GetMoves();
 
 }
