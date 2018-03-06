@@ -36,26 +36,29 @@ public class Pawn : ChessPiece {
             {
                 if (move == opt1)
                 {
-                    finalMoves.Add(coord);
+                    if (!isBlocked(coord, currentPos))
+                        finalMoves.Add(coord);
                 }
                 else if (move == opt2)
                 {
                     if (firstMove)
                     {
-                        finalMoves.Add(coord);
+                        if (!isBlocked(coord, currentPos))
+                            finalMoves.Add(coord);
                     }
                 }
                 else
                 {
                     if (GameManager.pieceLocations[coord.x, coord.z] != null && GameManager.pieceLocations[coord.x, coord.z].gameObject.tag == "Team2")
                     {
-                        finalMoves.Add(coord);
+                        if (!isBlocked(coord, currentPos))
+                            finalMoves.Add(coord);
                     }
                 }
             }
         }
 
 
-            return finalMoves;
+        return finalMoves;
         }
 }

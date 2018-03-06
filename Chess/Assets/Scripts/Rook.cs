@@ -24,7 +24,8 @@ public class Rook : ChessPiece {
             Coordinates coord = move + currentPos;
             if (coord.x <= 7 && coord.x >= 0 && coord.z <= 7 && coord.z >= 0)
             {
-                finalMoves.Add(coord);
+                if (!isBlocked(coord, currentPos))
+                    finalMoves.Add(coord);
             }
         }
         return finalMoves;
