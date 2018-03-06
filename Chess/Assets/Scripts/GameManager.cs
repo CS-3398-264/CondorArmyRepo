@@ -62,14 +62,14 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         // This is actually disgusting and the Unity inspector doesn't support polymorphic arrays
         pieceLocations = new ChessPiece[8, 8] {
-            { team1_rook1, team1_knight1, team1_bishop1, team1_queen, team1_king,  team1_bishop2, team1_knight2, team1_rook2 },
-            { team1_pawn1, team1_pawn2,   team1_pawn3,   team1_pawn4, team1_pawn5, team1_pawn6,   team1_pawn7,   team1_pawn8 },
-            { null,        null,          null,          null,        null,        null,          null,          null        },
-            { null,        null,          null,          null,        null,        null,          null,          null        },
-            { null,        null,          null,          null,        null,        null,          null,          null        },
-            { null,        null,          null,          null,        null,        null,          null,          null        },
-            { team2_pawn8, team2_pawn7,   team2_pawn6,   team2_pawn5, team2_pawn4, team2_pawn3,   team2_pawn2,   team2_pawn1 },
-            { team2_rook2, team2_knight2, team2_bishop2, team2_queen, team2_king,  team2_bishop1, team2_knight1, team2_rook2 }
+            { team1_rook1,   team1_pawn1, team1_bishop1, team1_queen, team1_king,  team1_bishop2, team2_pawn8, team2_rook2   },
+            { team1_knight1, team1_pawn2, team1_pawn3,   team1_pawn4, team1_pawn5, team1_pawn6,   team2_pawn7, team2_knight2 },
+            { team1_bishop1, team1_pawn3, null,          null,        null,        null,          team2_pawn6, team2_bishop2 },
+            { team1_queen,   team1_pawn4, null,          null,        null,        null,          team2_pawn5, team2_queen   },
+            { team1_king,    team1_pawn5, null,          null,        null,        null,          team2_pawn4, team2_king    },
+            { team1_bishop2, team1_pawn6, null,          null,        null,        null,          team2_pawn3, team2_bishop1 },
+            { team1_knight2, team1_pawn7, team2_pawn6,   team2_pawn5, team2_pawn4, team2_pawn3,   team2_pawn2, team2_knight1 },
+            { team1_rook2,   team1_pawn8, team2_bishop2, team2_queen, team2_king,  team2_bishop1, team2_pawn1, team2_rook2   }
         };
 
         mm = FindObjectOfType<MouseManager>();

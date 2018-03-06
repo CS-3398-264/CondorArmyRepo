@@ -39,9 +39,9 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 while (to != from)
                 {
-                    Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
+                    if (GameManager.pieceLocations[to.z, to.x] != null)
                     {
+                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
                         return true;
                     }
                     to.x -= 1;
@@ -53,8 +53,9 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 while (to != from)
                 {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
+                    if (GameManager.pieceLocations[to.z, to.x] != null)
                     {
+                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
                         return true;
                     }
                     to.x -= 1;
@@ -65,8 +66,9 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 while (to != from)
                 {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
+                    if (GameManager.pieceLocations[to.z, to.x] != null)
                     {
+                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
                         return true;
                     }
                     to.x -= 1;
@@ -81,8 +83,9 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 while (to != from)
                 {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
+                    if (GameManager.pieceLocations[to.z, to.x] != null)
                     {
+                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
                         return true;
                     }
                     to.z -= 1;
@@ -93,8 +96,9 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 while (to != from)
                 {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
+                    if (GameManager.pieceLocations[to.z, to.x] != null)
                     {
+                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
                         return true;
                     }
                     to.z += 1;
@@ -108,8 +112,9 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 while (to != from)
                 {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
+                    if (GameManager.pieceLocations[to.z, to.x] != null)
                     {
+                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
                         return true;
                     }
                     to.x += 1;
@@ -121,8 +126,9 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 while (to != from)
                 {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
+                    if (GameManager.pieceLocations[to.z, to.x] != null)
                     {
+                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
                         return true;
                     }
                     to.x += 1;
@@ -133,8 +139,9 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 while (to != from)
                 {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
+                    if (GameManager.pieceLocations[to.z, to.x] != null)
                     {
+                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
                         return true;
                     }
                     to.x += 1;
