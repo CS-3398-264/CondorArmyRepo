@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Rook : ChessPiece {
 
+    public List<Coordinates> knownMoves;
+
     void Start() {
         base.Setup();
     }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Knight : ChessPiece {
 
+    public List<Coordinates> knownMoves;
+
     void Start() {
         base.Setup();
     }
