@@ -29,7 +29,7 @@ public abstract class ChessPiece : MonoBehaviour {
         
     }
 
-    public bool ObstacleChecker(Coordinates to, Coordinates from) {
+    public void ObstacleChecker(Coordinates to, Coordinates from) {
         Coordinates diff = to - from;
         if (diff.x > 0)
         {
@@ -39,7 +39,7 @@ public abstract class ChessPiece : MonoBehaviour {
                 {
                     if (GameManager.pieceLocations[to.x - i, to.z - i] != null)
                     {
-                        return true;
+                        //return true;
                     }
                 }
             }
@@ -49,7 +49,7 @@ public abstract class ChessPiece : MonoBehaviour {
                 {
                     if (GameManager.pieceLocations[to.x - i, to.z] != null)
                     {
-                        return true;
+                        //return true;
                     }
                 }
             }
@@ -59,7 +59,7 @@ public abstract class ChessPiece : MonoBehaviour {
                 {
                     if (GameManager.pieceLocations[to.x - i, to.z + i] != null)
                     {
-                        return true;
+                        //return true;
                     }
                 }
             }
