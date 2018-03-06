@@ -5,11 +5,11 @@ using UnityEngine;
 public class Pawn : ChessPiece {
 
     public List<Coordinates> knownMoves;
-    private bool firstMove;
+    public bool firstMove;
 
     void Start() {
         base.Setup();
-        firstMove = false;
+        firstMove = true;
     }
 
     // Update is called once per frame
@@ -19,6 +19,12 @@ public class Pawn : ChessPiece {
 
     public override List<Coordinates> GetMoves()
     {
-        return new List<Coordinates>();
+        List<Coordinates> finalMoves = new List<Coordinates>();
+
+        if(firstMove) {
+            finalMoves.Add(new Coordinates(0,2));
+        }
+
+        return finalMoves;
     }
 }
