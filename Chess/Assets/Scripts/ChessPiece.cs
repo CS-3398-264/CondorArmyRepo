@@ -6,15 +6,14 @@ public abstract class ChessPiece : MonoBehaviour {
 
     public TeamInfo teamInfo;
 
-    public int locationX;
-    public int locationZ;
+    public Coordinates currentPos;
 
     private Renderer rend;
 
 	// Use this for initialization
 	public void Setup () {
-        locationX = (int)Mathf.Round(transform.position.x);
-        locationZ = (int)Mathf.Round(transform.position.z);
+        currentPos.x = (int)Mathf.Round(transform.position.x);
+        currentPos.z = (int)Mathf.Round(transform.position.z);
 
         rend = GetComponentInChildren<Renderer>();
         SetColor();
@@ -38,5 +37,6 @@ public abstract class ChessPiece : MonoBehaviour {
     }
 
     public abstract void OnMouseUp();
+    public abstract List<Coordinates> GetMoves();
 
 }
