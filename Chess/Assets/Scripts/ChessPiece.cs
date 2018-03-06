@@ -29,41 +29,120 @@ public abstract class ChessPiece : MonoBehaviour {
         
     }
 
-    public void ObstacleChecker(Coordinates to, Coordinates from) {
+    // Returns true if there is an object in the way.
+    public bool ObstacleChecker(Coordinates to, Coordinates from) {
         Coordinates diff = to - from;
+        Debug.Log("[" + diff.x + ", " + diff.z + "]");
         if (diff.x > 0)
         {
             if (diff.z > 0)
             {
-                for (int i = diff.x - 1; i >= 0; i--)
+                while (to != from)
                 {
-                    if (GameManager.pieceLocations[to.x - i, to.z - i] != null)
+                    if (GameManager.pieceLocations[to.x, to.z] != null)
                     {
-                        //return true;
+                        return true;
                     }
+                    to.x -= 1;
+                    to.z -= 1;
                 }
+                return false;
             }
             if (diff.z == 0)
             {
-                for (int i = diff.x - 1; i >= 0; i--)
+                while (to != from)
                 {
-                    if (GameManager.pieceLocations[to.x - i, to.z] != null)
+                    if (GameManager.pieceLocations[to.x, to.z] != null)
                     {
-                        //return true;
+                        return true;
                     }
+                    to.x -= 1;
                 }
+                return false;
             }
             if (diff.z < 0)
             {
-                for (int i = diff.z - 1; i < 0; i--)
+                while (to != from)
                 {
-                    if (GameManager.pieceLocations[to.x - i, to.z + i] != null)
+                    if (GameManager.pieceLocations[to.x, to.z] != null)
                     {
-                        //return true;
+                        return true;
                     }
+                    to.x -= 1;
+                    to.z += 1;
                 }
+                return false;
             }
         }
+        else if (diff.x == 0)
+        {
+            if (diff.z > 0)
+            {
+                while (to != from)
+                {
+                    if (GameManager.pieceLocations[to.x, to.z] != null)
+                    {
+                        return true;
+                    }
+                    to.z -= 1;
+                }
+                return false;
+            }
+            if (diff.z < 0)
+            {
+                while (to != from)
+                {
+                    if (GameManager.pieceLocations[to.x, to.z] != null)
+                    {
+                        return true;
+                    }
+                    to.z += 1;
+                }
+                return false;
+            }
+        }
+        else
+        {
+            if (diff.z > 0)
+            {
+                while (to != from)
+                {
+                    if (GameManager.pieceLocations[to.x, to.z] != null)
+                    {
+                        return true;
+                    }
+                    to.x += 1;
+                    to.z -= 1;
+                }
+                return false;
+            }
+            if (diff.z == 0)
+            {
+                while (to != from)
+                {
+                    if (GameManager.pieceLocations[to.x, to.z] != null)
+                    {
+                        return true;
+                    }
+                    to.x += 1;
+                }
+                return false;
+            }
+            if (diff.z < 0)
+            {
+                while (to != from)
+                {
+                    if (GameManager.pieceLocations[to.x, to.z] != null)
+                    {
+                        return true;
+                    }
+                    to.x += 1;
+                    to.z += 1;
+                }
+                return false;
+            }
+        }
+        return false;
     }
 
     public abstract List<Coordinates> GetMoves();

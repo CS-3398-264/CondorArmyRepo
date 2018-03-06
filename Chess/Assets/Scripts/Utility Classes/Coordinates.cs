@@ -43,6 +43,18 @@ public class Coordinates {
         return coord;
     }
 
+    public static bool operator ==(Coordinates a, Coordinates b) {
+        if (a.x == b.x && a.z == b.z)
+            return true;
+        return false;
+    }
+
+    public static bool operator !=(Coordinates a, Coordinates b) {
+        if (a.x != b.x || a.z != b.z)
+            return false;
+        return true;
+    }
+
     public Coordinates flip()
     {
         Coordinates coord = new Coordinates();
