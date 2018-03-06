@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         if (Input.GetMouseButtonUp(0))
         {
-            mm.selectedObject;
+            //mm.selectedObject;
         }
 	}
 }

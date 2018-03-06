@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Pawn : ChessPiece {
 
+    public List<Coordinates> knownMoves;
+
     void Start() {
         base.Setup();
     }
