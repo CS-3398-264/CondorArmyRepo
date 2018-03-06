@@ -21,9 +21,18 @@ public class Pawn : ChessPiece {
     {
         List<Coordinates> finalMoves = new List<Coordinates>();
 
-        if(firstMove) {
-            finalMoves.Add(new Coordinates(0,2));
-            firstMove = false;
+        foreach (Coordinates move in knownMoves) {
+            Coordinates coord = move;
+
+            if (gameObject.tag == "Team2")
+            {
+                coord = coord.flip();
+            }
+            coord = coord + currentPos;
+            if (coord.x <= 7 && coord.x >= 0 && coord.z <= 7 && coord.z >= 0)
+            {
+                finalMoves.Add(coord);
+            }
         }
 
         return finalMoves;

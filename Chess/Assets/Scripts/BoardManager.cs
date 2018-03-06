@@ -32,10 +32,18 @@ public class BoardManager : MonoBehaviour {
     {
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
-            if (i % 2 == 0)
-                transform.GetChild(i).GetComponent<Renderer>().material = blackTile;
-            else
-                transform.GetChild(i).GetComponent<Renderer>().material = whiteTile;
+            if (transform.GetChild(i).position.z % 2 == 0) {
+                if (i % 2 == 0)
+                    transform.GetChild(i).GetComponent<Renderer>().material = blackTile;
+                else
+                    transform.GetChild(i).GetComponent<Renderer>().material = whiteTile;
+            }
+            else {
+                if (i % 2 == 0)
+                    transform.GetChild(i).GetComponent<Renderer>().material = whiteTile;
+                else
+                    transform.GetChild(i).GetComponent<Renderer>().material = blackTile;
+            }
         }
     }
 }

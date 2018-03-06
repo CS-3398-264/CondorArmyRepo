@@ -20,14 +20,12 @@ public class Queen : ChessPiece {
         List<Coordinates> finalMoves = new List<Coordinates>();
 
         foreach (Coordinates move in knownMoves) {
-            Debug.Log("Here I am");
             Coordinates coord = move + currentPos;
             if (coord.x <= 7 && coord.x >= 0 && coord.z <= 7 && coord.z >= 0)
             {
                 finalMoves.Add(coord);
             }
         }
-
         return finalMoves;
     }
 }

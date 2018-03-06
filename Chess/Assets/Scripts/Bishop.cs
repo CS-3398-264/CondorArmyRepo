@@ -17,6 +17,16 @@ public class Bishop : ChessPiece {
 
     public override List<Coordinates> GetMoves()
     {
-        return new List<Coordinates>();
+        List<Coordinates> finalMoves = new List<Coordinates>();
+
+        foreach (Coordinates move in knownMoves)
+        {
+            Coordinates coord = move + currentPos;
+            if (coord.x <= 7 && coord.x >= 0 && coord.z <= 7 && coord.z >= 0)
+            {
+                finalMoves.Add(coord);
+            }
+        }
+        return finalMoves;
     }
 }

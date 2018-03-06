@@ -72,12 +72,14 @@ public class GameManager : MonoBehaviour {
         };
 
         mm = FindObjectOfType<MouseManager>();
+        bm = FindObjectOfType<BoardManager>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (mm.selectedObject != null)
         {
+            bm.ResetBoard();
             if (mm.selectedObject.tag == "Team1" || mm.selectedObject.tag == "Team2")
             {
                 List<Coordinates> moves = mm.selectedObject.GetComponent<ChessPiece>().GetMoves();

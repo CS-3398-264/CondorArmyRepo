@@ -35,4 +35,16 @@ public class Coordinates {
         coord.z = a.z * b.z;
         return coord;
     }
+
+    public Coordinates flip()
+    {
+        Coordinates coord = new Coordinates();
+        coord.x = x;
+        coord.z = z * -1;
+        return coord;
+    }
+
+    public override string ToString() {
+        return "(" + x + "," + z + ")";
+    }
 }
