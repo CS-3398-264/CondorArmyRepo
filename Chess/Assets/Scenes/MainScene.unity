@@ -5245,6 +5245,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1098668262}
+  - component: {fileID: 1098668263}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -5329,6 +5330,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1098668263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1098668261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2393bf26ea6a114582a998ee4e96f4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whiteTile: {fileID: 2100000, guid: 08c37ec02b33c8d4785a75ce889e41d0, type: 2}
+  blackTile: {fileID: 2100000, guid: 44c85ec3282ae614f90ce126274490c5, type: 2}
 --- !u!1001 &1143369230
 Prefab:
   m_ObjectHideFlags: 0

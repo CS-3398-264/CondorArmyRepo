@@ -314,6 +314,7 @@
     <Compile Include="Assets\Scripts\Rook.cs" />
     <Compile Include="Assets\Scripts\TeamInfo.cs" />
     <Compile Include="Assets\Scripts\UI Elements\ColorReferenceImage.cs" />
+    <Compile Include="Assets\Scripts\Utility Classes\Coordinates.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\SpecularSelected.shader" />
