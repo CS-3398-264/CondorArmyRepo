@@ -17,9 +17,4 @@ public class Pawn : ChessPiece {
     {
         return new List<Coordinates>();
     }
-
-    public override void OnMouseUp()
-    {
-        Debug.Log("Pawn was clicked!");
-    }
 }

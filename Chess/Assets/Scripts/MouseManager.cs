@@ -5,7 +5,7 @@ using UnityEngine;
 public class MouseManager : MonoBehaviour
 {
 
-    public static GameObject selectedObject;
+    public GameObject selectedObject;
     private Ray ray;
 
     // Use this for initialization

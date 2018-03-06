@@ -26,17 +26,9 @@ public abstract class ChessPiece : MonoBehaviour {
 
     public void HighlightPiece()
     {
-        if (MouseManager.selectedObject == gameObject)
-        {
-            //currentShader = selectedShader;
-        }
-        else if (false/*currentShader != defaultShader*/)
-        {
-            //currentShader = defaultShader;
-        }
+        
     }
 
-    public abstract void OnMouseUp();
     public abstract List<Coordinates> GetMoves();
 
 }

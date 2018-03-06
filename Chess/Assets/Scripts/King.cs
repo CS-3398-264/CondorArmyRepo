@@ -17,9 +17,4 @@ public class King : ChessPiece {
     {
         return new List<Coordinates>();
     }
-
-    public override void OnMouseUp()
-    {
-        Debug.Log("King was clicked!");
-    }
 }
