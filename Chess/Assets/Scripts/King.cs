@@ -13,6 +13,11 @@ public class King : ChessPiece {
 
 	}
 
+    public override List<Coordinates> GetMoves()
+    {
+        return new List<Coordinates>();
+    }
+
     public override void OnMouseUp()
     {
         Debug.Log("King was clicked!");

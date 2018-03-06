@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Knight : ChessPiece {
+public class Bishop : ChessPiece {
 
     void Start() {
         base.Setup();
@@ -12,6 +12,11 @@ public class Knight : ChessPiece {
     void Update () {
 	    
 	}
+
+    public override List<Coordinates> GetMoves()
+    {
+        return new List<Coordinates>();
+    }
 
     public override void OnMouseUp()
     {
