@@ -25,6 +25,7 @@ public class BoardManager : MonoBehaviour {
         foreach (Coordinates move in moves)
         {
             transform.GetChild((move.z * BOARD_SIZE) + move.x).GetComponent<Renderer>().material = highlight;
+            transform.GetChild((move.z * BOARD_SIZE) + move.x).GetComponent<Tile>().isHighlighted = true;
         }
     }
 
@@ -44,6 +45,7 @@ public class BoardManager : MonoBehaviour {
                 else
                     transform.GetChild(i).GetComponent<Renderer>().material = blackTile;
             }
+            transform.GetChild(i).GetComponent<Tile>().isHighlighted = false;
         }
     }
 }

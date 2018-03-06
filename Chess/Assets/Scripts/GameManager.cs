@@ -64,6 +64,44 @@ public class GameManager : MonoBehaviour {
 
         pieceLocations = new ChessPiece[8, 8];
 
+        updatePieceLocations();
+
+        mm = FindObjectOfType<MouseManager>();
+        bm = FindObjectOfType<BoardManager>();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+        if (mm.selectedObject != null)
+        {
+            if (currentObject != null)
+            {
+                if (currentObject.tag == "Team1" && mm.selectedObject.tag == "Tile")
+                {
+                    if (mm.selectedObject.GetComponent<Tile>().isHighlighted)
+                    {
+                        currentObject.GetComponent<ChessPiece>().move(mm.selectedObject.GetComponent<Tile>().tilePosition);
+                        bm.ResetBoard();
+                    }
+                }
+            }
+            if (currentObject != mm.selectedObject)
+            {
+                bm.ResetBoard();
+                if (mm.selectedObject.tag == "Team1")
+                {
+                    List<Coordinates> moves = mm.selectedObject.GetComponent<ChessPiece>().GetMoves();
+                    bm.HighlightTiles(moves);
+                }
+            }
+            else
+            {
+                currentObject = mm.selectedObject;
+            }
+        }
+	}
+
+    public  void updatePieceLocations() {
         // ***************************************
         // Team 1 array setup
         // ***************************************
@@ -113,28 +151,5 @@ public class GameManager : MonoBehaviour {
         pieceLocations[team2_queen.currentPos.x, team2_queen.currentPos.z] = team2_queen;
         pieceLocations[team2_king.currentPos.x, team2_king.currentPos.z] = team2_king;
         // ***************************************
-
-        mm = FindObjectOfType<MouseManager>();
-        bm = FindObjectOfType<BoardManager>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (mm.selectedObject != null)
-        {
-            if (currentObject != mm.selectedObject)
-            {
-                bm.ResetBoard();
-                if (mm.selectedObject.tag == "Team1")
-                {
-                    List<Coordinates> moves = mm.selectedObject.GetComponent<ChessPiece>().GetMoves();
-                    bm.HighlightTiles(moves);
-                }
-            }
-            else
-            {
-                currentObject = mm.selectedObject;
-            }
-        }
-	}
+    }
 }
