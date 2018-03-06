@@ -6,7 +6,7 @@ public class Bishop : ChessPiece {
 
     public List<Coordinates> knownMoves;
 
-    void Start() {
+    void Awake() {
         base.Setup();
     }
 

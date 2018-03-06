@@ -6,7 +6,7 @@ public class Queen : ChessPiece {
 
     public List<Coordinates> knownMoves;
 
-    void Start() {
+    void Awake() {
         base.Setup();
     }
 

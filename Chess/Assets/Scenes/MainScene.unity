@@ -372,6 +372,7 @@ MonoBehaviour:
   team2_bishop2: {fileID: 666658660}
   team2_queen: {fileID: 685347388}
   team2_king: {fileID: 1250574185}
+  bm: {fileID: 0}
 --- !u!4 &44980418
 Transform:
   m_ObjectHideFlags: 0

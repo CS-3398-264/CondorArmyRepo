@@ -61,16 +61,58 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         // This is actually disgusting and the Unity inspector doesn't support polymorphic arrays
-        pieceLocations = new ChessPiece[8, 8] {
-            { team1_rook1,   team1_pawn1, team1_bishop1, team1_queen, team1_king,  team1_bishop2, team2_pawn8, team2_rook2   },
-            { team1_knight1, team1_pawn2, team1_pawn3,   team1_pawn4, team1_pawn5, team1_pawn6,   team2_pawn7, team2_knight2 },
-            { team1_bishop1, team1_pawn3, null,          null,        null,        null,          team2_pawn6, team2_bishop2 },
-            { team1_queen,   team1_pawn4, null,          null,        null,        null,          team2_pawn5, team2_queen   },
-            { team1_king,    team1_pawn5, null,          null,        null,        null,          team2_pawn4, team2_king    },
-            { team1_bishop2, team1_pawn6, null,          null,        null,        null,          team2_pawn3, team2_bishop1 },
-            { team1_knight2, team1_pawn7, team2_pawn6,   team2_pawn5, team2_pawn4, team2_pawn3,   team2_pawn2, team2_knight1 },
-            { team1_rook2,   team1_pawn8, team2_bishop2, team2_queen, team2_king,  team2_bishop1, team2_pawn1, team2_rook2   }
-        };
+
+        pieceLocations = new ChessPiece[8, 8];
+
+        // ***************************************
+        // Team 1 array setup
+        // ***************************************
+        pieceLocations[team1_pawn1.currentPos.x, team1_pawn1.currentPos.z] = team1_pawn1;
+        pieceLocations[team1_pawn2.currentPos.x, team1_pawn2.currentPos.z] = team1_pawn2;
+        pieceLocations[team1_pawn3.currentPos.x, team1_pawn3.currentPos.z] = team1_pawn3;
+        pieceLocations[team1_pawn4.currentPos.x, team1_pawn4.currentPos.z] = team1_pawn4;
+        pieceLocations[team1_pawn5.currentPos.x, team1_pawn5.currentPos.z] = team1_pawn5;
+        pieceLocations[team1_pawn6.currentPos.x, team1_pawn6.currentPos.z] = team1_pawn6;
+        pieceLocations[team1_pawn7.currentPos.x, team1_pawn7.currentPos.z] = team1_pawn7;
+        pieceLocations[team1_pawn8.currentPos.x, team1_pawn8.currentPos.z] = team1_pawn8;
+
+        pieceLocations[team1_rook1.currentPos.x, team1_rook1.currentPos.z] = team1_rook1;
+        pieceLocations[team1_rook2.currentPos.x, team1_rook2.currentPos.z] = team1_rook2;
+
+        pieceLocations[team1_knight1.currentPos.x, team1_knight1.currentPos.z] = team1_knight1;
+        pieceLocations[team1_knight2.currentPos.x, team1_knight2.currentPos.z] = team1_knight2;
+
+        pieceLocations[team1_bishop1.currentPos.x, team1_bishop1.currentPos.z] = team1_bishop1;
+        pieceLocations[team1_bishop2.currentPos.x, team1_bishop2.currentPos.z] = team1_bishop2;
+
+        pieceLocations[team1_queen.currentPos.x, team1_queen.currentPos.z] = team1_queen;
+        pieceLocations[team1_king.currentPos.x, team1_king.currentPos.z] = team1_king;
+        // ***************************************
+
+        // ***************************************
+        // Team 2 array setup
+        // ***************************************
+        pieceLocations[team2_pawn1.currentPos.x, team2_pawn1.currentPos.z] = team2_pawn1;
+        pieceLocations[team2_pawn2.currentPos.x, team2_pawn2.currentPos.z] = team2_pawn2;
+        pieceLocations[team2_pawn3.currentPos.x, team2_pawn3.currentPos.z] = team2_pawn3;
+        pieceLocations[team2_pawn4.currentPos.x, team2_pawn4.currentPos.z] = team2_pawn4;
+        pieceLocations[team2_pawn5.currentPos.x, team2_pawn5.currentPos.z] = team2_pawn5;
+        pieceLocations[team2_pawn6.currentPos.x, team2_pawn6.currentPos.z] = team2_pawn6;
+        pieceLocations[team2_pawn7.currentPos.x, team2_pawn7.currentPos.z] = team2_pawn7;
+        pieceLocations[team2_pawn8.currentPos.x, team2_pawn8.currentPos.z] = team2_pawn8;
+
+        pieceLocations[team2_rook1.currentPos.x, team2_rook1.currentPos.z] = team2_rook1;
+        pieceLocations[team2_rook2.currentPos.x, team2_rook2.currentPos.z] = team2_rook2;
+
+        pieceLocations[team2_knight1.currentPos.x, team2_knight1.currentPos.z] = team2_knight1;
+        pieceLocations[team2_knight2.currentPos.x, team2_knight2.currentPos.z] = team2_knight2;
+
+        pieceLocations[team2_bishop1.currentPos.x, team2_bishop1.currentPos.z] = team2_bishop1;
+        pieceLocations[team2_bishop2.currentPos.x, team2_bishop2.currentPos.z] = team2_bishop2;
+
+        pieceLocations[team2_queen.currentPos.x, team2_queen.currentPos.z] = team2_queen;
+        pieceLocations[team2_king.currentPos.x, team2_king.currentPos.z] = team2_king;
+        // ***************************************
 
         mm = FindObjectOfType<MouseManager>();
         bm = FindObjectOfType<BoardManager>();

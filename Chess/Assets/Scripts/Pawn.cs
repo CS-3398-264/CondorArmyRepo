@@ -7,7 +7,7 @@ public class Pawn : ChessPiece {
     public List<Coordinates> knownMoves;
     public bool firstMove;
 
-    void Start() {
+    void Awake() {
         base.Setup();
         firstMove = true;
     }
