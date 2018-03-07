@@ -36,7 +36,7 @@ public class Pawn : ChessPiece {
             {
                 if (move == opt1)
                 {
-                    if (!isBlocked(coord, currentPos))
+                    if (!isBlocked(coord, currentPos) && GameManager.pieceLocations[coord.x, coord.z] == null)
                         finalMoves.Add(coord);
                 }
                 else if (move == opt2)

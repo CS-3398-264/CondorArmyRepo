@@ -371,23 +371,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamInfo: {fileID: 11400000, guid: 8da1f468784cdb54992efacee889b2e7, type: 2}
+  gm: {fileID: 0}
   currentPos:
     x: 0
     z: 0
   knownMoves:
   - x: 1
-    z: 3
+    z: 2
   - x: -1
-    z: 3
-  - x: 3
+    z: 2
+  - x: 2
     z: 1
-  - x: 3
+  - x: 2
     z: -1
   - x: -1
-    z: -3
+    z: -2
   - x: 1
-    z: -3
-  - x: -3
+    z: -2
+  - x: -2
     z: 1
-  - x: -3
+  - x: -2
     z: -1
