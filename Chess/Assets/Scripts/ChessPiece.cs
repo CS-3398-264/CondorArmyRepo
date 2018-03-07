@@ -81,42 +81,109 @@ public abstract class ChessPiece : MonoBehaviour {
     }
     public bool isCheck(Coordinates pos)
     {
-        ChessPiece[,] tempLocations = GameManager.pieceLocations;
+        ChessPiece[,] tempLocations = new ChessPiece[8, 8];
+        for(int z = 0; z <= 7; z++)
+        {
+            for (int x = 0; x <=7; x++)
+            {
+                tempLocations[x, z] = GameManager.pieceLocations[x, z];
+            }
+        }
         Coordinates kingLoc;
         string ownTeam;
         string opponentTeam;
 
         if(gameObject.tag == "Team1")
         {
-            kingLoc = new Coordinates(gm.team1_king.currentPos.x, gm.team1_king.currentPos.z);
+            if (this is King)
+            {
+                kingLoc = new Coordinates(pos.x, pos.z);
+                Debug.Log("KING: " + kingLoc);
+            } else
+            {
+                kingLoc = new Coordinates(gm.team1_king.currentPos.x, gm.team1_king.currentPos.z);
+            }
             ownTeam = "Team1";
             opponentTeam = "Team2";
         }
         else
         {
-            kingLoc = new Coordinates(gm.team2_king.currentPos.x, gm.team2_king.currentPos.z);
+            if (this is King)
+            {
+                kingLoc = new Coordinates(pos.x, pos.z);
+            }
+            else
+            {
+                kingLoc = new Coordinates(gm.team1_king.currentPos.x, gm.team1_king.currentPos.z);
+            }
             ownTeam = "Team2";
             opponentTeam = "Team1";
         }
 
         tempLocations[currentPos.x, currentPos.z] = null;
         tempLocations[pos.x, pos.z] = this;
-
-        for(int i = kingLoc.x; i <= 7; i++)
+        
+        for(int i = kingLoc.x + 1; i <= 7; i++)
         {
-            if (tempLocations[i, kingLoc.z] != null && tempLocations[i, kingLoc.z].gameObject.tag == opponentTeam)
+            ChessPiece tempPiece = tempLocations[i, kingLoc.z];
+            if (tempPiece != null)
             {
-                if (tempLocations[i,kingLoc.z] == null)
+                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (i-kingLoc.x == 1))))
                 {
-
+                    return true;
                 }
+                break;
             }
         }
-        for (int i = kingLoc.x; i >= 0; i--)
+        for (int i = kingLoc.x - 1; i >= 0; i--)
         {
-            if (tempLocations[i, kingLoc.z] != null && tempLocations[i, kingLoc.z].gameObject.tag == opponentTeam)
+            ChessPiece tempPiece = tempLocations[i, kingLoc.z];
+            Debug.Log(tempPiece + " at (" + i +","+ kingLoc.z + ")");
+            if (tempPiece != null)
             {
+                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (kingLoc.x - i == 1))))
+                {
+                    Debug.Log("Here");
+                    return true;
+                }
+                break;
+            }
+        }
+        for (int i = kingLoc.z + 1; i <= 7; i++)
+        {
+            ChessPiece tempPiece = tempLocations[kingLoc.x, i];
+            if (tempPiece != null)
+            {
+                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (i - kingLoc.z == 1))))
+                {
+                    return true;
+                }
+                break;
+            }
+        }
+        for (int i = kingLoc.z - 1; i >= 0; i--)
+        {
+            ChessPiece tempPiece = tempLocations[kingLoc.x, i];
+            if (tempPiece != null)
+            {
+                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (kingLoc.z - i == 1))))
+                {
+                    return true;
+                }
+                break;
+            }
+        }
 
+        for (int i = kingLoc.x + 1; i >= 0, ; i++, j++)
+        {
+            ChessPiece tempPiece = tempLocations[kingLoc.x, i];
+            if (tempPiece != null)
+            {
+                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (kingLoc.z - i == 1))))
+                {
+                    return true;
+                }
+                break;
             }
         }
 
