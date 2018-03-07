@@ -102,6 +102,14 @@ public class GameManager : MonoBehaviour {
         }
 	}
 
+    public void AddPieceAt(ChessPiece piece, Coordinates pos) {
+        pieceLocations[pos.x, pos.z] = piece;
+    }
+
+    public void RemovePieceAt(Coordinates pos) {
+        pieceLocations[pos.x, pos.z] = null;
+    }
+
     public  void updatePieceLocations() {
         // ***************************************
         // Team 1 array setup

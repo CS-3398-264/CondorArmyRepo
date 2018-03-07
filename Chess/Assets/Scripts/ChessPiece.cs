@@ -32,7 +32,8 @@ public abstract class ChessPiece : MonoBehaviour {
     public void move(Coordinates moveTo) {
         transform.position = new Vector3(moveTo.x, 0f, moveTo.z);
         updatePosition();
-        gm.updatePieceLocations();
+        gm.RemovePieceAt(currentPos);
+        gm.AddPieceAt(this, moveTo);
     }
 
     private void updatePosition() {
