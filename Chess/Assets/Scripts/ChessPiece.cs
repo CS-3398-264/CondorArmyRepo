@@ -31,8 +31,8 @@ public abstract class ChessPiece : MonoBehaviour {
     // FIXME: Does not work!
     public void move(Coordinates moveTo) {
         transform.position = new Vector3(moveTo.x, 0f, moveTo.z);
-        updatePosition();
         gm.RemovePieceAt(currentPos);
+        updatePosition();
         gm.AddPieceAt(this, moveTo);
     }
 
@@ -79,133 +79,49 @@ public abstract class ChessPiece : MonoBehaviour {
             return false;
         }
     }
+    public bool isCheck(Coordinates pos)
+    {
+        ChessPiece[,] tempLocations = GameManager.pieceLocations;
+        Coordinates kingLoc;
+        string ownTeam;
+        string opponentTeam;
 
-    // Returns true if there is an object in the way.
-    /*
-    public bool ObstacleChecker(Coordinates to, Coordinates from) {
-        Coordinates diff = to - from;
-        Debug.Log("[" + diff.x + ", " + diff.z + "]");
-        if (diff.x > 0)
+        if(gameObject.tag == "Team1")
         {
-            if (diff.z > 0)
-            {
-                while (to != from)
-                {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
-                    {
-                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
-                        return true;
-                    }
-                    to.x -= 1;
-                    to.z -= 1;
-                }
-                return false;
-            }
-            if (diff.z == 0)
-            {
-                while (to != from)
-                {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
-                    {
-                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
-                        return true;
-                    }
-                    to.x -= 1;
-                }
-                return false;
-            }
-            if (diff.z < 0)
-            {
-                while (to != from)
-                {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
-                    {
-                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
-                        return true;
-                    }
-                    to.x -= 1;
-                    to.z += 1;
-                }
-                return false;
-            }
-        }
-        else if (diff.x == 0)
-        {
-            if (diff.z > 0)
-            {
-                while (to != from)
-                {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
-                    {
-                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
-                        return true;
-                    }
-                    to.z -= 1;
-                }
-                return false;
-            }
-            if (diff.z < 0)
-            {
-                while (to != from)
-                {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
-                    {
-                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
-                        return true;
-                    }
-                    to.z += 1;
-                }
-                return false;
-            }
+            kingLoc = new Coordinates(gm.team1_king.currentPos.x, gm.team1_king.currentPos.z);
+            ownTeam = "Team1";
+            opponentTeam = "Team2";
         }
         else
         {
-            if (diff.z > 0)
+            kingLoc = new Coordinates(gm.team2_king.currentPos.x, gm.team2_king.currentPos.z);
+            ownTeam = "Team2";
+            opponentTeam = "Team1";
+        }
+
+        tempLocations[currentPos.x, currentPos.z] = null;
+        tempLocations[pos.x, pos.z] = this;
+
+        for(int i = kingLoc.x; i <= 7; i++)
+        {
+            if (tempLocations[i, kingLoc.z] != null && tempLocations[i, kingLoc.z].gameObject.tag == opponentTeam)
             {
-                while (to != from)
+                if (tempLocations[i,kingLoc.z] == null)
                 {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
-                    {
-                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
-                        return true;
-                    }
-                    to.x += 1;
-                    to.z -= 1;
+
                 }
-                return false;
-            }
-            if (diff.z == 0)
-            {
-                while (to != from)
-                {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
-                    {
-                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
-                        return true;
-                    }
-                    to.x += 1;
-                }
-                return false;
-            }
-            if (diff.z < 0)
-            {
-                while (to != from)
-                {
-                    if (GameManager.pieceLocations[to.x, to.z] != null)
-                    {
-                        Debug.Log("In the way: " + GameManager.pieceLocations[to.x, to.z]);
-                        return true;
-                    }
-                    to.x += 1;
-                    to.z += 1;
-                }
-                return false;
             }
         }
-        Debug.Log("Why am I ending up here?");
+        for (int i = kingLoc.x; i >= 0; i--)
+        {
+            if (tempLocations[i, kingLoc.z] != null && tempLocations[i, kingLoc.z].gameObject.tag == opponentTeam)
+            {
+
+            }
+        }
+
         return false;
     }
-    */
 
     public abstract List<Coordinates> GetMoves();
 
