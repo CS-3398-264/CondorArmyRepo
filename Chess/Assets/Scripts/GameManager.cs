@@ -96,8 +96,9 @@ public class GameManager : MonoBehaviour {
             }
             else
             {
-                currentObject = mm.selectedObject;
+                //nothing so far
             }
+            currentObject = mm.selectedObject;
         }
 	}
 
