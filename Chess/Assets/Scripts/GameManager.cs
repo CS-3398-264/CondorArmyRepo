@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        ArrayVisualizer.VisualizeArray2D(pieceLocations);
         if (mm.selectedObject != null)
         {
             if (currentObject != null)
@@ -99,8 +100,8 @@ public class GameManager : MonoBehaviour {
                 //nothing so far
             }
             currentObject = mm.selectedObject;
-        }
-	}
+        } 
+    }
 
     public void AddPieceAt(ChessPiece piece, Coordinates pos) {
         pieceLocations[pos.x, pos.z] = piece;
@@ -160,5 +161,10 @@ public class GameManager : MonoBehaviour {
         pieceLocations[team2_queen.currentPos.x, team2_queen.currentPos.z] = team2_queen;
         pieceLocations[team2_king.currentPos.x, team2_king.currentPos.z] = team2_king;
         // ***************************************
+    }
+
+    public void QuitGame() {
+        Debug.Log("Quitting Game");
+        Application.Quit();
     }
 }

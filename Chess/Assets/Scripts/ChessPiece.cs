@@ -12,7 +12,8 @@ public abstract class ChessPiece : MonoBehaviour {
 
 	// Use this for initialization
 	public void Setup () {
-        updatePosition();
+        currentPos.x = (int)Mathf.Round(transform.position.x);
+        currentPos.z = (int)Mathf.Round(transform.position.z);
 
         rend = GetComponentInChildren<Renderer>();
         SetColor();
@@ -30,13 +31,13 @@ public abstract class ChessPiece : MonoBehaviour {
 
     // FIXME: Does not work!
     public void move(Coordinates moveTo) {
-        transform.position = new Vector3(moveTo.x, 0f, moveTo.z);
         gm.RemovePieceAt(currentPos);
-        updatePosition();
+        updatePosition(moveTo);
         gm.AddPieceAt(this, moveTo);
     }
 
-    private void updatePosition() {
+    private void updatePosition(Coordinates moveTo) {
+        transform.position = new Vector3(moveTo.x, 0f, moveTo.z);
         currentPos.x = (int)Mathf.Round(transform.position.x);
         currentPos.z = (int)Mathf.Round(transform.position.z);
     }
@@ -78,49 +79,6 @@ public abstract class ChessPiece : MonoBehaviour {
         {
             return false;
         }
-    }
-    public bool isCheck(Coordinates pos)
-    {
-        ChessPiece[,] tempLocations = GameManager.pieceLocations;
-        Coordinates kingLoc;
-        string ownTeam;
-        string opponentTeam;
-
-        if(gameObject.tag == "Team1")
-        {
-            kingLoc = new Coordinates(gm.team1_king.currentPos.x, gm.team1_king.currentPos.z);
-            ownTeam = "Team1";
-            opponentTeam = "Team2";
-        }
-        else
-        {
-            kingLoc = new Coordinates(gm.team2_king.currentPos.x, gm.team2_king.currentPos.z);
-            ownTeam = "Team2";
-            opponentTeam = "Team1";
-        }
-
-        tempLocations[currentPos.x, currentPos.z] = null;
-        tempLocations[pos.x, pos.z] = this;
-
-        for(int i = kingLoc.x; i <= 7; i++)
-        {
-            if (tempLocations[i, kingLoc.z] != null && tempLocations[i, kingLoc.z].gameObject.tag == opponentTeam)
-            {
-                if (tempLocations[i,kingLoc.z] == null)
-                {
-
-                }
-            }
-        }
-        for (int i = kingLoc.x; i >= 0; i--)
-        {
-            if (tempLocations[i, kingLoc.z] != null && tempLocations[i, kingLoc.z].gameObject.tag == opponentTeam)
-            {
-
-            }
-        }
-
-        return false;
     }
 
     public abstract List<Coordinates> GetMoves();
