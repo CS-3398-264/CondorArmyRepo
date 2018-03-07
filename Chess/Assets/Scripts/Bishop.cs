@@ -24,7 +24,7 @@ public class Bishop : ChessPiece {
             Coordinates coord = move + currentPos;
             if (coord.x <= 7 && coord.x >= 0 && coord.z <= 7 && coord.z >= 0)
             {
-                if (!isBlocked(coord, currentPos))
+                if (!isBlocked(coord, currentPos) && !isCheck(coord))
                     finalMoves.Add(coord);
             }
         }

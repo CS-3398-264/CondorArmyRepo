@@ -139,12 +139,10 @@ public abstract class ChessPiece : MonoBehaviour {
         for (int i = kingLoc.x - 1; i >= 0; i--)
         {
             ChessPiece tempPiece = tempLocations[i, kingLoc.z];
-            Debug.Log(tempPiece + " at (" + i +","+ kingLoc.z + ")");
             if (tempPiece != null)
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (kingLoc.x - i == 1))))
                 {
-                    Debug.Log("Here");
                     return true;
                 }
                 break;
@@ -175,15 +173,73 @@ public abstract class ChessPiece : MonoBehaviour {
             }
         }
 
-        for (int i = kingLoc.x + 1; i >= 0, ; i++, j++)
+        int j = kingLoc.z + 1;
+        for (int i = kingLoc.x + 1; i <=7; i++, j++)
         {
-            ChessPiece tempPiece = tempLocations[kingLoc.x, i];
+            ChessPiece tempPiece = tempLocations[i, j];
             if (tempPiece != null)
             {
-                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (kingLoc.z - i == 1))))
+                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King || tempPiece is Pawn) && (i - kingLoc.x == 1))))
                 {
                     return true;
                 }
+                break;
+            }
+            if (j >= 7)
+            {
+                break;
+            }
+        }
+        j = kingLoc.z - 1;
+        for (int i = kingLoc.x - 1; i >= 0; i--, j--)
+        {
+            ChessPiece tempPiece = tempLocations[i, j];
+            if (tempPiece != null)
+            {
+                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King || tempPiece is Pawn) && (kingLoc.x - i == 1))))
+                {
+                    return true;
+                }
+                break;
+            }
+            if (j <= 0)
+            {
+                break;
+            }
+        }
+        j = kingLoc.z - 1;
+        for (int i = kingLoc.x + 1; i <= 7; i++, j--)
+        {
+            ChessPiece tempPiece = tempLocations[i, j];
+            if (tempPiece != null)
+            {
+                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King || tempPiece is Pawn) && (i - kingLoc.x == 1))))
+                {
+                    return true;
+                }
+                break;
+            }
+            if (j <= 0)
+            {
+                break;
+            }
+        }
+        j = kingLoc.z + 1;
+        for (int i = kingLoc.x - 1; i >= 0; i--, j++)
+        {
+            ChessPiece tempPiece = tempLocations[i, j];
+            Debug.Log(tempPiece + " at (" + i + "," + kingLoc.z + ")");
+            if (tempPiece != null)
+            {
+                Debug.Log("Here");
+                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King || tempPiece is Pawn) && (kingLoc.x - i == 1))))
+                {
+                    return true;
+                }
+                break;
+            }
+            if (j >= 7)
+            {
                 break;
             }
         }

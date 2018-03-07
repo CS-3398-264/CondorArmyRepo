@@ -24,7 +24,7 @@ public class Knight : ChessPiece {
             Coordinates coord = move + currentPos;
             if (coord.x <= 7 && coord.x >= 0 && coord.z <= 7 && coord.z >= 0)
             {
-                if (GameManager.pieceLocations[coord.x, coord.z] == null || GameManager.pieceLocations[coord.x, coord.z].gameObject.tag == "Team2")
+                if ((GameManager.pieceLocations[coord.x, coord.z] == null || GameManager.pieceLocations[coord.x, coord.z].gameObject.tag == "Team2") && !isCheck(coord))
                 {
                     finalMoves.Add(coord);
                 }
