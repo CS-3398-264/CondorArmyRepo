@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class ArrayVisualizer : MonoBehaviour {
 
-    private void OnGUI() {
+    private static ChessPiece[,] currentArray;
+
+    void OnGUI() {
         for (int i = 0; i < 8; i++)
         {
             for (int j = 0; j < 8; j++)
             {
-                if (GameManager.pieceLocations[i, j] != null)
+                if (currentArray[i, j] != null)
                 {
                     GUI.TextField(new Rect(i * 25, j * 25, 25, 25), "X");
                 }
@@ -22,13 +24,7 @@ public class ArrayVisualizer : MonoBehaviour {
         }
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public static void VisualizeArray2D(ChessPiece[,] array) {
+        currentArray = array;
+    }
 }

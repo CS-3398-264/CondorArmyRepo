@@ -12,7 +12,8 @@ public abstract class ChessPiece : MonoBehaviour {
 
 	// Use this for initialization
 	public void Setup () {
-        updatePosition();
+        currentPos.x = (int)Mathf.Round(transform.position.x);
+        currentPos.z = (int)Mathf.Round(transform.position.z);
 
         rend = GetComponentInChildren<Renderer>();
         SetColor();
@@ -30,13 +31,13 @@ public abstract class ChessPiece : MonoBehaviour {
 
     // FIXME: Does not work!
     public void move(Coordinates moveTo) {
-        transform.position = new Vector3(moveTo.x, 0f, moveTo.z);
         gm.RemovePieceAt(currentPos);
-        updatePosition();
+        updatePosition(moveTo);
         gm.AddPieceAt(this, moveTo);
     }
 
-    private void updatePosition() {
+    private void updatePosition(Coordinates moveTo) {
+        transform.position = new Vector3(moveTo.x, 0f, moveTo.z);
         currentPos.x = (int)Mathf.Round(transform.position.x);
         currentPos.z = (int)Mathf.Round(transform.position.z);
     }
