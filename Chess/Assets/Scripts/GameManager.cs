@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
     public static int turn;
+    public static bool isCheckmate;
+    public GameObject gameOver;
+    public Text winText;
+    public Text loseText;
 
     // =================
     // Team one pieces
@@ -87,6 +92,8 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        if (isCheckmate)
+            return;
         if (turn == 0)
         {
             if (mm.selectedObject != null)
@@ -128,11 +135,11 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void AddPieceAt(ChessPiece piece, Coordinates pos) {
+    public static void AddPieceAt(ChessPiece piece, Coordinates pos) {
         pieceLocations[pos.x, pos.z] = piece;
     }
 
-    public void RemovePieceAt(Coordinates pos) {
+    public static void RemovePieceAt(Coordinates pos) {
         pieceLocations[pos.x, pos.z] = null;
     }
 
@@ -188,12 +195,24 @@ public class GameManager : MonoBehaviour {
         // ***************************************
     }
 
+    public void win() {
+        gameOver.SetActive(true);
+        winText.gameObject.SetActive(true);
+        loseText.gameObject.SetActive(false);
+    }
+
+    public void lose() {
+        gameOver.SetActive(true);
+        winText.gameObject.SetActive(false);
+        loseText.gameObject.SetActive(true);
+    }
+
     public void QuitGame() {
         Debug.Log("Quitting Game");
         Application.Quit();
     }
 
-    public bool isCheckmate(ChessPiece king)
+    public bool IsCheckmate(ChessPiece king)
     {
         List<ChessPiece> dangers = new List<ChessPiece>();
         List<Coordinates> allMoves = new List<Coordinates>();

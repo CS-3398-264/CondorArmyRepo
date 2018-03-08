@@ -344,6 +344,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d70f406af41a543bd7d23c26b9e8d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 0}
+  winText: {fileID: 0}
+  loseText: {fileID: 0}
   team1_pawn1: {fileID: 1478567874}
   team1_pawn2: {fileID: 1294294595}
   team1_pawn3: {fileID: 357881219}
@@ -9167,7 +9170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1637015536
 MonoBehaviour:
   m_ObjectHideFlags: 0

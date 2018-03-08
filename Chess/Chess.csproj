@@ -300,14 +300,6 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\King.cs" />
     <Compile Include="Assets\Scripts\Knight.cs" />
-    <Compile Include="Assets\Scripts\Old Scripts\Bishop.cs" />
-    <Compile Include="Assets\Scripts\Old Scripts\ChessPiece.cs" />
-    <Compile Include="Assets\Scripts\Old Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Old Scripts\King.cs" />
-    <Compile Include="Assets\Scripts\Old Scripts\Knight.cs" />
-    <Compile Include="Assets\Scripts\Old Scripts\Pawn.cs" />
-    <Compile Include="Assets\Scripts\Old Scripts\Queen.cs" />
-    <Compile Include="Assets\Scripts\Old Scripts\Rook.cs" />
     <Compile Include="Assets\Scripts\Pawn.cs" />
     <Compile Include="Assets\Scripts\Queen.cs" />
     <Compile Include="Assets\Scripts\ReloadScene.cs" />

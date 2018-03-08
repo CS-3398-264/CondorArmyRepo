@@ -12,9 +12,10 @@ public class Skynet : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        pieces = new List<GameObject>();
         UpdatePieces();
 
-        thinkingTime = Random.Range(2f, 5f);
+        thinkingTime = Random.Range(1f, 3f);
 	}
 	
 	// Update is called once per frame
@@ -35,7 +36,7 @@ public class Skynet : MonoBehaviour {
                 {
                     Coordinates move = moves[Random.Range(0, moves.Count)];
                     selectedPiece.GetComponent<ChessPiece>().move(move);
-                    thinkingTime = Random.Range(2f, 5f);
+                    thinkingTime = Random.Range(1f, 3f);
                 }
             }
             else
@@ -54,7 +55,7 @@ public class Skynet : MonoBehaviour {
         for (int i = 0; i < parentPiecesObject.transform.childCount; i++)
         {
             if (parentPiecesObject.transform.GetChild(i).gameObject.activeInHierarchy)
-                pieces[i] = parentPiecesObject.transform.GetChild(i).gameObject;
+                pieces.Add(parentPiecesObject.transform.GetChild(i).gameObject);
         }
     }
 }

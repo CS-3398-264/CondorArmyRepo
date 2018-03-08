@@ -44,21 +44,23 @@ public abstract class ChessPiece : MonoBehaviour {
         {
             GameManager.DeactivateChildren(GameManager.pieceLocations[moveTo.x, moveTo.z].gameObject, false);
         }
-        gm.RemovePieceAt(currentPos);
+        GameManager.RemovePieceAt(currentPos);
         updatePosition(moveTo);
-        gm.AddPieceAt(this, moveTo);
+        GameManager.AddPieceAt(this, moveTo);
         if (this is Pawn)
         {
             firstMove = false;
         }
 
-        if (gm.isCheckmate(gm.team2_king) || !gm.team2_king.gameObject.active)
+        if (gm.IsCheckmate(gm.team2_king) || !gm.team2_king.gameObject.activeInHierarchy)
         {
-            //WIN
+            GameManager.isCheckmate = true;
+            gm.win();
         }
-        else if (gm.isCheckmate(gm.team1_king) || !gm.team2_king.gameObject.active)
+        else if (gm.IsCheckmate(gm.team1_king) || !gm.team2_king.gameObject.activeInHierarchy)
         {
-            //LOSS 
+            GameManager.isCheckmate = true;
+            gm.lose();
         }
 
 
