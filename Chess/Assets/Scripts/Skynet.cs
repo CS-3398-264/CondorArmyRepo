@@ -26,16 +26,19 @@ public class Skynet : MonoBehaviour {
             List<Coordinates> moves;
             GameObject selectedPiece;
             if (thinkingTime <= 0f) {
-                do
+                selectedPiece = pieces[Random.Range(0, pieces.Length)];
+                moves = selectedPiece.GetComponent<ChessPiece>().GetMoves(true);
+                if (moves.Count != 0)
                 {
-                    selectedPiece = pieces[Random.Range(0, pieces.Length)];
-                    moves = selectedPiece.GetComponent<ChessPiece>().GetMoves(true);
-                } while (moves.Count == 0);
-                Coordinates move = moves[Random.Range(0, moves.Count)];
-                selectedPiece.GetComponent<ChessPiece>().move(move);
-                thinkingTime = Random.Range(2f, 5f);
+                    Coordinates move = moves[Random.Range(0, moves.Count)];
+                    selectedPiece.GetComponent<ChessPiece>().move(move);
+                    thinkingTime = Random.Range(2f, 5f);
+                }
             }
-            thinkingTime -= Time.deltaTime;
+            else
+            {
+                thinkingTime -= Time.deltaTime;
+            }
         }
 	}
 }
