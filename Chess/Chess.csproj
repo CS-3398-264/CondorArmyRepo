@@ -310,9 +310,12 @@
     <Compile Include="Assets\Scripts\Old Scripts\Rook.cs" />
     <Compile Include="Assets\Scripts\Pawn.cs" />
     <Compile Include="Assets\Scripts\Queen.cs" />
+    <Compile Include="Assets\Scripts\ReloadScene.cs" />
     <Compile Include="Assets\Scripts\Rook.cs" />
+    <Compile Include="Assets\Scripts\Skynet.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\UI Elements\ColorReferenceImage.cs" />
+    <Compile Include="Assets\Scripts\Unit Tests\PieceColorTest.cs" />
     <Compile Include="Assets\Scripts\Utility Classes\ArrayVisualizer.cs" />
     <Compile Include="Assets\Scripts\Utility Classes\BoardData.cs" />
     <Compile Include="Assets\Scripts\Utility Classes\Coordinates.cs" />
