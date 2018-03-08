@@ -16,7 +16,7 @@ public class Pawn : ChessPiece {
 	    
 	}
 
-    public override List<Coordinates> GetMoves()
+    public override List<Coordinates> GetMoves(bool runCheckCheck)
     {
         List<Coordinates> finalMoves = new List<Coordinates>();
 
@@ -36,18 +36,38 @@ public class Pawn : ChessPiece {
                 if (move == opt1)
                 {
                     Debug.Log("her");
-                    if (!isBlocked(coord, currentPos) && (GameManager.pieceLocations[coord.x, coord.z] == null/* && (isCheck(coord).Count == 0)*/))
+                    if (!isBlocked(coord, currentPos) && (GameManager.pieceLocations[coord.x, coord.z] == null))
                     {
-                        finalMoves.Add(coord);
+                        if (runCheckCheck)
+                        {
+                            if (isCheck(coord).Count == 0)
+                            {
+                                finalMoves.Add(coord);
+                            }
+                        }
+                        else
+                        {
+                            finalMoves.Add(coord);
+                        }
                     }
                 }
                 else if (move == opt2)
                 {
                     if (firstMove)
                     {
-                        if (!isBlocked(coord, currentPos) && (isCheck(coord).Count == 0))
+                        if (!isBlocked(coord, currentPos))
                         {
-                            finalMoves.Add(coord);
+                            if (runCheckCheck)
+                            {
+                                if (isCheck(coord).Count == 0)
+                                {
+                                    finalMoves.Add(coord);
+                                }
+                            }
+                            else
+                            {
+                                finalMoves.Add(coord);
+                            }
                         }
                     }
                 }
@@ -55,9 +75,19 @@ public class Pawn : ChessPiece {
                 {
                     if (GameManager.pieceLocations[coord.x, coord.z] != null && GameManager.pieceLocations[coord.x, coord.z].gameObject.tag != gameObject.tag)
                     {
-                        if (!isBlocked(coord, currentPos) && (isCheck(coord).Count == 0))
+                        if (!isBlocked(coord, currentPos))
                         {
-                            finalMoves.Add(coord);
+                            if (runCheckCheck)
+                            {
+                                if (isCheck(coord).Count == 0)
+                                {
+                                    finalMoves.Add(coord);
+                                }
+                            }
+                            else
+                            {
+                                finalMoves.Add(coord);
+                            }
                         }
                     }
                 }

@@ -15,7 +15,7 @@ public class Knight : ChessPiece {
 	    
 	}
 
-    public override List<Coordinates> GetMoves()
+    public override List<Coordinates> GetMoves(bool runCheckCheck)
     {
         List<Coordinates> finalMoves = new List<Coordinates>();
 
@@ -24,9 +24,19 @@ public class Knight : ChessPiece {
             Coordinates coord = move + currentPos;
             if (coord.x <= 7 && coord.x >= 0 && coord.z <= 7 && coord.z >= 0)
             {
-                if ((GameManager.pieceLocations[coord.x, coord.z] == null || GameManager.pieceLocations[coord.x, coord.z].gameObject.tag == "Team2") && (isCheck(coord).Count == 0))
+                if ((GameManager.pieceLocations[coord.x, coord.z] == null || GameManager.pieceLocations[coord.x, coord.z].gameObject.tag == "Team2"))
                 {
-                    finalMoves.Add(coord);
+                    if (runCheckCheck)
+                    {
+                        if (isCheck(coord).Count == 0)
+                        {
+                            finalMoves.Add(coord);
+                        }
+                    }
+                    else
+                    {
+                        finalMoves.Add(coord);
+                    }
                 }
             }
         }

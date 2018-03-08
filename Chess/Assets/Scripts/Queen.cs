@@ -15,7 +15,7 @@ public class Queen : ChessPiece {
         
     }
 
-    public override List<Coordinates> GetMoves()
+    public override List<Coordinates> GetMoves(bool runCheckCheck)
     {
         List<Coordinates> finalMoves = new List<Coordinates>();
 
@@ -23,9 +23,19 @@ public class Queen : ChessPiece {
             Coordinates coord = move + currentPos;
             if (coord.x <= 7 && coord.x >= 0 && coord.z <= 7 && coord.z >= 0)
             {
-                if (!isBlocked(coord, currentPos) && (isCheck(coord).Count == 0))
+                if (!isBlocked(coord, currentPos))
                 {
-                    finalMoves.Add(coord);
+                    if (runCheckCheck)
+                    {
+                        if (isCheck(coord).Count == 0)
+                        {
+                            finalMoves.Add(coord);
+                        }
+                    }
+                    else
+                    {
+                        finalMoves.Add(coord);
+                    }
                 }
             }
         }

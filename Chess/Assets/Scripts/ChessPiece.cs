@@ -11,7 +11,7 @@ public abstract class ChessPiece : MonoBehaviour {
 
     private Renderer[] rend;
 
-    public abstract List<Coordinates> GetMoves();
+    public abstract List<Coordinates> GetMoves(bool runCheckCheck);
 
     // Use this for initialization
     public void Setup () {
@@ -59,11 +59,11 @@ public abstract class ChessPiece : MonoBehaviour {
 
         if (isHit)
         {
-            if (hitInfo.transform.tag == "Team1")
+            if (hitInfo.transform.tag == gameObject.tag)
             {
                 return true;
             }
-            else if (hitInfo.transform.tag == "Team2")
+            else if (hitInfo.transform.tag != gameObject.tag)
             {
                 if (hitInfo.transform.GetComponent<ChessPiece>().currentPos != to)
                 {

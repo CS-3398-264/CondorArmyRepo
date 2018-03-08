@@ -87,49 +87,51 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        ArrayVisualizer.VisualizeArray2D(pieceLocations);
-        if (mm.selectedObject != null)
+        if (turn == 0)
         {
-            if (currentObject != null)
+            if (mm.selectedObject != null)
             {
-                if (currentObject.tag == "Team1")
+                if (currentObject != null)
                 {
-                    if (mm.selectedObject.tag == "Tile")
+                    if (currentObject.tag == "Team1")
                     {
-                        if (mm.selectedObject.GetComponent<Tile>().isHighlighted)
+                        if (mm.selectedObject.tag == "Tile")
                         {
-                            if (pieceLocations[mm.selectedObject.GetComponent<Tile>().tilePosition.x, mm.selectedObject.GetComponent<Tile>().tilePosition.z] != null)
+                            if (mm.selectedObject.GetComponent<Tile>().isHighlighted)
                             {
-                                DeactivateChildren(pieceLocations[mm.selectedObject.GetComponent<Tile>().tilePosition.x, mm.selectedObject.GetComponent<Tile>().tilePosition.z].gameObject, false);
+                                if (pieceLocations[mm.selectedObject.GetComponent<Tile>().tilePosition.x, mm.selectedObject.GetComponent<Tile>().tilePosition.z] != null)
+                                {
+                                    DeactivateChildren(pieceLocations[mm.selectedObject.GetComponent<Tile>().tilePosition.x, mm.selectedObject.GetComponent<Tile>().tilePosition.z].gameObject, false);
+                                }
+                                currentObject.GetComponent<ChessPiece>().move(mm.selectedObject.GetComponent<Tile>().tilePosition);
+                                bm.ResetBoard();
                             }
-                            currentObject.GetComponent<ChessPiece>().move(mm.selectedObject.GetComponent<Tile>().tilePosition);
+                        }
+                        if (mm.selectedObject.tag == "Team2" && bm.transform.GetChild((mm.selectedObject.GetComponent<ChessPiece>().currentPos.z * 8) + mm.selectedObject.GetComponent<ChessPiece>().currentPos.x).GetComponent<Tile>().isHighlighted == true)
+                        {
+                            Coordinates tempPos = mm.selectedObject.GetComponent<ChessPiece>().currentPos;
+                            DeactivateChildren(pieceLocations[mm.selectedObject.GetComponent<ChessPiece>().currentPos.x, mm.selectedObject.GetComponent<ChessPiece>().currentPos.z].gameObject, false);
+                            currentObject.GetComponent<ChessPiece>().move(tempPos);
                             bm.ResetBoard();
                         }
                     }
-                    if (mm.selectedObject.tag == "Team2" && bm.transform.GetChild((mm.selectedObject.GetComponent<ChessPiece>().currentPos.z * 8) + mm.selectedObject.GetComponent<ChessPiece>().currentPos.x).GetComponent<Tile>().isHighlighted == true)
+                }
+                if (currentObject != mm.selectedObject)
+                {
+                    bm.ResetBoard();
+                    if (mm.selectedObject.tag == "Team1")
                     {
-                        Coordinates tempPos = mm.selectedObject.GetComponent<ChessPiece>().currentPos;
-                        DeactivateChildren(pieceLocations[mm.selectedObject.GetComponent<ChessPiece>().currentPos.x, mm.selectedObject.GetComponent<ChessPiece>().currentPos.z].gameObject, false);
-                        currentObject.GetComponent<ChessPiece>().move(tempPos);
-                        bm.ResetBoard();
+                        List<Coordinates> moves = mm.selectedObject.GetComponent<ChessPiece>().GetMoves(true);
+                        bm.HighlightTiles(moves);
                     }
                 }
-            }
-            if (currentObject != mm.selectedObject)
-            {
-                bm.ResetBoard();
-                if (mm.selectedObject.tag == "Team1")
+                else
                 {
-                    List<Coordinates> moves = mm.selectedObject.GetComponent<ChessPiece>().GetMoves();
-                    bm.HighlightTiles(moves);
+                    //nothing so far
                 }
+                currentObject = mm.selectedObject;
             }
-            else
-            {
-                //nothing so far
-            }
-            currentObject = mm.selectedObject;
-        } 
+        }
     }
 
     public void AddPieceAt(ChessPiece piece, Coordinates pos) {
@@ -207,7 +209,7 @@ public class GameManager : MonoBehaviour {
         {
             if ((piece != null) && (piece.gameObject.tag == king.gameObject.tag))
             {
-                allMoves.AddRange(piece.GetMoves());
+                allMoves.AddRange(piece.GetMoves(false));
                 Debug.Log("Location: " + piece.currentPos);
                 Debug.Log(allMoves.Count);
             }
