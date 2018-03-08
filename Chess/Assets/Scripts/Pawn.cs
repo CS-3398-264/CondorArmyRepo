@@ -35,14 +35,14 @@ public class Pawn : ChessPiece {
             {
                 if (move == opt1)
                 {
-                    if (!isBlocked(coord, currentPos) && (GameManager.pieceLocations[coord.x, coord.z] == null && !isCheck(coord)))
+                    if (!isBlocked(coord, currentPos) && (GameManager.pieceLocations[coord.x, coord.z] == null && (isCheck(coord).Count == 0)))
                         finalMoves.Add(coord);
                 }
                 else if (move == opt2)
                 {
                     if (firstMove)
                     {
-                        if (!isBlocked(coord, currentPos) && !isCheck(coord))
+                        if (!isBlocked(coord, currentPos) && (isCheck(coord).Count == 0))
                             finalMoves.Add(coord);
                     }
                 }
@@ -50,7 +50,7 @@ public class Pawn : ChessPiece {
                 {
                     if (GameManager.pieceLocations[coord.x, coord.z] != null && GameManager.pieceLocations[coord.x, coord.z].gameObject.tag == "Team2")
                     {
-                        if (!isBlocked(coord, currentPos) && !isCheck(coord))
+                        if (!isBlocked(coord, currentPos) && (isCheck(coord).Count == 0))
                             finalMoves.Add(coord);
                     }
                 }

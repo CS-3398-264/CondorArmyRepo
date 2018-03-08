@@ -178,6 +178,52 @@ public class GameManager : MonoBehaviour {
         // ***************************************
     }
 
+    public void QuitGame() {
+        Debug.Log("Quitting Game");
+        Application.Quit();
+    }
+
+    public bool isCheckMate(string team)
+    {
+        List<ChessPiece> dangers = new List<ChessPiece>();
+        List<Coordinates> allMoves = new List<Coordinates>();
+        Coordinates kingLoc;
+
+        foreach (ChessPiece piece in pieceLocations)
+        {
+            if (piece != null && piece.gameObject.tag == team)
+                allMoves.AddRange(piece.GetMoves());
+        }
+
+        if (team == "Team1")
+        {
+            kingLoc = new Coordinates(team1_king.currentPos.x,team1_king.currentPos.z);
+
+            dangers = team1_king.isCheck(team1_king.currentPos);
+            if (dangers.Count != 0)
+            {
+                foreach(ChessPiece badPiece in dangers)
+                {
+                    if (allMoves.Contains(badPiece.currentPos)) {
+                        dangers.Remove(badPiece);
+                        continue;
+                    }
+                    if (badPiece is Rook || badPiece is Queen)
+                    {
+                        if (kingLoc.x == badPiece.currentPos.x)
+                        {
+                            if (kingLoc.z > badPiece.currentPos.z)
+                            {
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public void DeactivateChildren(GameObject g, bool a)
     {
         g.SetActive(a);
@@ -186,10 +232,5 @@ public class GameManager : MonoBehaviour {
         {
             DeactivateChildren(child.gameObject, a);
         }
-    }
-
-    public void QuitGame() {
-        Debug.Log("Quitting Game");
-        Application.Quit();
     }
 }

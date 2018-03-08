@@ -85,8 +85,11 @@ public abstract class ChessPiece : MonoBehaviour {
             return false;
         }
     }
-    public bool isCheck(Coordinates pos)
+
+    public List<ChessPiece> isCheck(Coordinates pos)
     {
+        List<ChessPiece> dangers = new List<ChessPiece>();
+
         ChessPiece[,] tempLocations = new ChessPiece[8, 8];
         for(int z = 0; z <= 7; z++)
         {
@@ -136,7 +139,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (i-kingLoc.x == 1))))
                 {
-                    return true;
+                    dangers.Add(tempPiece);
                 }
                 break;
             }
@@ -148,7 +151,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (kingLoc.x - i == 1))))
                 {
-                    return true;
+                    dangers.Add(tempPiece);
                 }
                 break;
             }
@@ -160,7 +163,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (i - kingLoc.z == 1))))
                 {
-                    return true;
+                    dangers.Add(tempPiece);
                 }
                 break;
             }
@@ -172,7 +175,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (kingLoc.z - i == 1))))
                 {
-                    return true;
+                    dangers.Add(tempPiece);
                 }
                 break;
             }
@@ -190,7 +193,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King || tempPiece is Pawn) && (i - kingLoc.x == 1))))
                 {
-                    return true;
+                    dangers.Add(tempPiece);
                 }
                 break;
             }
@@ -207,7 +210,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King) && (kingLoc.x - i == 1))))
                 {
-                    return true;
+                    dangers.Add(tempPiece);
                 }
                 break;
             }
@@ -224,7 +227,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King) && (i - kingLoc.x == 1))))
                 {
-                    return true;
+                    dangers.Add(tempPiece);
                 }
                 break;
             }
@@ -237,19 +240,19 @@ public abstract class ChessPiece : MonoBehaviour {
                 break;
             }
             ChessPiece tempPiece = tempLocations[i, j];
-            Debug.Log(tempPiece + " at (" + i + "," + kingLoc.z + ")");
+            //Debug.Log(tempPiece + " at (" + i + "," + kingLoc.z + ")");
             if (tempPiece != null)
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King || tempPiece is Pawn) && (kingLoc.x - i == 1))))
                 {
-                    return true;
+                    dangers.Add(tempPiece);
                 }
                 break;
             }
         }
 
 
-        return false;
+        return dangers;
     }
 
     public abstract List<Coordinates> GetMoves();
