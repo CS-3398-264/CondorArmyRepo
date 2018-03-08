@@ -43,6 +43,7 @@ public abstract class ChessPiece : MonoBehaviour {
         {
             firstMove = false;
         }
+        GameManager.ChangeTurns();
     }
 
     public bool isBlocked(Coordinates to, Coordinates from) {

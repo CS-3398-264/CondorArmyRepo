@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-    
+
+    public static int turn;
+
     // =================
     // Team one pieces
     // =================
@@ -68,8 +70,21 @@ public class GameManager : MonoBehaviour {
 
         mm = FindObjectOfType<MouseManager>();
         bm = FindObjectOfType<BoardManager>();
+
+        turn = 0;
 	}
 	
+    public static void ChangeTurns() {
+        if (turn == 0)
+        {
+            turn = 1;
+        }
+        else
+        {
+            turn = 0;
+        }
+    }
+
 	// Update is called once per frame
 	void Update () {
         ArrayVisualizer.VisualizeArray2D(pieceLocations);
