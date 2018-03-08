@@ -11,10 +11,7 @@ public class Skynet : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         pieces = new GameObject[parentPiecesObject.transform.childCount];
-		for (int i = 0; i < parentPiecesObject.transform.childCount; i++)
-        {
-            pieces[i] = parentPiecesObject.transform.GetChild(i).gameObject;
-        }
+        UpdatePieces();
 
         thinkingTime = Random.Range(2f, 5f);
 	}
@@ -41,4 +38,12 @@ public class Skynet : MonoBehaviour {
             }
         }
 	}
+
+    private void UpdatePieces() {
+        for (int i = 0; i < parentPiecesObject.transform.childCount; i++)
+        {
+            if (parentPiecesObject.transform.GetChild(i).gameObject.activeInHierarchy)
+                pieces[i] = parentPiecesObject.transform.GetChild(i).gameObject;
+        }
+    }
 }
