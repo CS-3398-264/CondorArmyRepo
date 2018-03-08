@@ -9,20 +9,25 @@ public abstract class ChessPiece : MonoBehaviour {
     public Coordinates currentPos;
     public bool firstMove;
 
-    private Renderer rend;
+    private Renderer[] rend;
 
-	// Use this for initialization
-	public void Setup () {
+    public abstract List<Coordinates> GetMoves();
+
+    // Use this for initialization
+    public void Setup () {
         currentPos.x = (int)Mathf.Round(transform.position.x);
         currentPos.z = (int)Mathf.Round(transform.position.z);
 
-        rend = GetComponentInChildren<Renderer>();
-        SetColor();
+        rend = GetComponentsInChildren<Renderer>();
+        teamInfo.teamColor = teamInfo.defaultColor;
     }
 
     public void SetColor()
     {
-        rend.material.color = teamInfo.teamColor;
+        foreach (Renderer r in rend)
+        {
+            r.material.color = teamInfo.teamColor;
+        }
     }
 
     public void HighlightPiece()
@@ -30,7 +35,6 @@ public abstract class ChessPiece : MonoBehaviour {
         
     }
 
-    // FIXME: Does not work!
     public void move(Coordinates moveTo) {
         gm.RemovePieceAt(currentPos);
         updatePosition(moveTo);
@@ -39,12 +43,6 @@ public abstract class ChessPiece : MonoBehaviour {
         {
             firstMove = false;
         }
-    }
-
-    private void updatePosition(Coordinates moveTo) {
-        transform.position = new Vector3(moveTo.x, 0f, moveTo.z);
-        currentPos.x = (int)Mathf.Round(transform.position.x);
-        currentPos.z = (int)Mathf.Round(transform.position.z);
     }
 
     public bool isBlocked(Coordinates to, Coordinates from) {
@@ -255,6 +253,10 @@ public abstract class ChessPiece : MonoBehaviour {
         return dangers;
     }
 
-    public abstract List<Coordinates> GetMoves();
+    private void updatePosition(Coordinates moveTo) {
+        transform.position = new Vector3(moveTo.x, 0f, moveTo.z);
+        currentPos.x = (int)Mathf.Round(transform.position.x);
+        currentPos.z = (int)Mathf.Round(transform.position.z);
+    }
 
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class TeamInfo : ScriptableObject {
 
     public Color teamColor;
+    public Color defaultColor;
     public int teamNumber;
 
 }
