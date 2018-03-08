@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class ChessPiece : MonoBehaviour {
 
@@ -8,6 +9,9 @@ public abstract class ChessPiece : MonoBehaviour {
     public GameManager gm;
     public Coordinates currentPos;
     public bool firstMove;
+    public GameObject gameoverPanel;
+    public Text winText;
+    public Text loseText;
 
     private Renderer[] rend;
 
@@ -47,6 +51,17 @@ public abstract class ChessPiece : MonoBehaviour {
         {
             firstMove = false;
         }
+
+        if (gm.isCheckmate(gm.team2_king) || !gm.team2_king.gameObject.active)
+        {
+            //WIN
+        }
+        else if (gm.isCheckmate(gm.team1_king) || !gm.team2_king.gameObject.active)
+        {
+            //LOSS 
+        }
+
+
         GameManager.ChangeTurns();
     }
 

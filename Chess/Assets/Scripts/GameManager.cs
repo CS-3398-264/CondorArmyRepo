@@ -382,6 +382,7 @@ public class GameManager : MonoBehaviour {
 
     public static void DeactivateChildren(GameObject g, bool a)
     {
+        RemovePieceAt(g.GetComponent<ChessPiece>().currentPos);
         g.SetActive(a);
 
         foreach (Transform child in g.transform)
