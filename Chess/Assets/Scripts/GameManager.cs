@@ -105,7 +105,6 @@ public class GameManager : MonoBehaviour {
                 bm.ResetBoard();
                 if (mm.selectedObject.tag == "Team1")
                 {
-                    Debug.Log("Here");
                     List<Coordinates> moves = mm.selectedObject.GetComponent<ChessPiece>().GetMoves();
                     bm.HighlightTiles(moves);
                 }
@@ -183,7 +182,7 @@ public class GameManager : MonoBehaviour {
         Application.Quit();
     }
 
-    public bool isCheckMate(string team)
+    public bool isCheckmate(ChessPiece king)
     {
         List<ChessPiece> dangers = new List<ChessPiece>();
         List<Coordinates> allMoves = new List<Coordinates>();
@@ -191,37 +190,183 @@ public class GameManager : MonoBehaviour {
 
         foreach (ChessPiece piece in pieceLocations)
         {
-            if (piece != null && piece.gameObject.tag == team)
+            if ((piece != null) && (piece.gameObject.tag == king.gameObject.tag))
+            {
                 allMoves.AddRange(piece.GetMoves());
+                Debug.Log("Location: " + piece.currentPos);
+                Debug.Log(allMoves.Count);
+            }
         }
 
-        if (team == "Team1")
+        foreach (Coordinates a in allMoves)
         {
-            kingLoc = new Coordinates(team1_king.currentPos.x,team1_king.currentPos.z);
+            Debug.Log(a);
+        }
 
+        if (king.gameObject.tag == "Team1")
+        {
+            kingLoc = new Coordinates(team1_king.currentPos.x, team1_king.currentPos.z);
             dangers = team1_king.isCheck(team1_king.currentPos);
-            if (dangers.Count != 0)
+        }
+        else
+        {
+            kingLoc = new Coordinates(team2_king.currentPos.x, team2_king.currentPos.z);
+            dangers = team2_king.isCheck(team2_king.currentPos);
+        }
+
+        if (dangers.Count != 0)
+        {
+            List<ChessPiece> tempDangers = new List<ChessPiece>(dangers);
+
+            foreach (ChessPiece badPiece in tempDangers)
             {
-                foreach(ChessPiece badPiece in dangers)
+                Debug.Log("Badd: "+badPiece.currentPos);
+                foreach (Coordinates move in allMoves)
                 {
-                    if (allMoves.Contains(badPiece.currentPos)) {
+                    if(move == badPiece.currentPos)
+                    {
                         dangers.Remove(badPiece);
                         continue;
                     }
-                    if (badPiece is Rook || badPiece is Queen)
+                }
+
+                if (badPiece is Rook || badPiece is Queen)
+                {
+                    if (kingLoc.x == badPiece.currentPos.x)
                     {
-                        if (kingLoc.x == badPiece.currentPos.x)
+                        if (kingLoc.z > badPiece.currentPos.z)
                         {
-                            if (kingLoc.z > badPiece.currentPos.z)
+                            for (int i = kingLoc.z - 1; i > badPiece.currentPos.z; i--)
                             {
-                                
+                                foreach (Coordinates move in allMoves)
+                                {
+                                    if (move == badPiece.currentPos)
+                                    {
+                                        dangers.Remove(badPiece);
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int i = kingLoc.z + 1; i < badPiece.currentPos.z; i++)
+                            {
+                                foreach (Coordinates move in allMoves)
+                                {
+                                    if (move == badPiece.currentPos)
+                                    {
+                                        dangers.Remove(badPiece);
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (kingLoc.x > badPiece.currentPos.x)
+                        {
+                            for (int i = kingLoc.x - 1; i > badPiece.currentPos.x; i--)
+                            {
+                                foreach (Coordinates move in allMoves)
+                                {
+                                    if (move == badPiece.currentPos)
+                                    {
+                                        dangers.Remove(badPiece);
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int i = kingLoc.x + 1; i < badPiece.currentPos.x; i++)
+                            {
+                                foreach (Coordinates move in allMoves)
+                                {
+                                    if (move == badPiece.currentPos)
+                                    {
+                                        dangers.Remove(badPiece);
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (badPiece is Bishop || badPiece is Queen)
+                {
+                    if (kingLoc.x - badPiece.currentPos.x > 0)
+                    {
+                        if (kingLoc.z - badPiece.currentPos.z > 0)
+                        {
+                            int j = kingLoc.z - 1;
+                            for (int i = kingLoc.x - 1; i < badPiece.currentPos.x; i++, j++)
+                            {
+                                foreach (Coordinates move in allMoves)
+                                {
+                                    if (move == badPiece.currentPos)
+                                    {
+                                        dangers.Remove(badPiece);
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            int j = kingLoc.z + 1;
+                            for (int i = kingLoc.x - 1; i < badPiece.currentPos.x; i++, j--)
+                            {
+                                foreach (Coordinates move in allMoves)
+                                {
+                                    if (move == badPiece.currentPos)
+                                    {
+                                        dangers.Remove(badPiece);
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (kingLoc.z - badPiece.currentPos.z > 0)
+                        {
+                            int j = kingLoc.z - 1;
+                            for (int i = kingLoc.x + 1; i > badPiece.currentPos.x; i--, j++)
+                            {
+                                foreach (Coordinates move in allMoves)
+                                {
+                                    if (move == badPiece.currentPos)
+                                    {
+                                        dangers.Remove(badPiece);
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            int j = kingLoc.z + 1;
+                            for (int i = kingLoc.x + 1; i > badPiece.currentPos.x; i--, j--)
+                            {
+                                foreach (Coordinates move in allMoves)
+                                {
+                                    if (move == badPiece.currentPos)
+                                    {
+                                        dangers.Remove(badPiece);
+                                        continue;
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
         }
-        return false;
+        return (dangers.Count != 0);
     }
 
     public void DeactivateChildren(GameObject g, bool a)
