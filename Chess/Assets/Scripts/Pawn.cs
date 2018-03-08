@@ -5,7 +5,6 @@ using UnityEngine;
 public class Pawn : ChessPiece {
 
     public List<Coordinates> knownMoves;
-    public bool firstMove;
 
     void Awake() {
         base.Setup();

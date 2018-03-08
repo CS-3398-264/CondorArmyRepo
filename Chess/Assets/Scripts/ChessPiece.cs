@@ -7,6 +7,7 @@ public abstract class ChessPiece : MonoBehaviour {
     public TeamInfo teamInfo;
     public GameManager gm;
     public Coordinates currentPos;
+    public bool firstMove;
 
     private Renderer rend;
 
@@ -34,6 +35,10 @@ public abstract class ChessPiece : MonoBehaviour {
         gm.RemovePieceAt(currentPos);
         updatePosition(moveTo);
         gm.AddPieceAt(this, moveTo);
+        if (this is Pawn)
+        {
+            firstMove = false;
+        }
     }
 
     private void updatePosition(Coordinates moveTo) {
@@ -176,6 +181,10 @@ public abstract class ChessPiece : MonoBehaviour {
         int j = kingLoc.z + 1;
         for (int i = kingLoc.x + 1; i <=7; i++, j++)
         {
+            if (j > 7)
+            {
+                break;
+            }
             ChessPiece tempPiece = tempLocations[i, j];
             if (tempPiece != null)
             {
@@ -183,66 +192,62 @@ public abstract class ChessPiece : MonoBehaviour {
                 {
                     return true;
                 }
-                break;
-            }
-            if (j >= 7)
-            {
                 break;
             }
         }
         j = kingLoc.z - 1;
         for (int i = kingLoc.x - 1; i >= 0; i--, j--)
         {
+            if (j < 0)
+            {
+                break;
+            }
             ChessPiece tempPiece = tempLocations[i, j];
             if (tempPiece != null)
             {
-                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King || tempPiece is Pawn) && (kingLoc.x - i == 1))))
+                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King) && (kingLoc.x - i == 1))))
                 {
                     return true;
                 }
-                break;
-            }
-            if (j <= 0)
-            {
                 break;
             }
         }
         j = kingLoc.z - 1;
         for (int i = kingLoc.x + 1; i <= 7; i++, j--)
         {
+            if (j < 0)
+            {
+                break;
+            }
             ChessPiece tempPiece = tempLocations[i, j];
             if (tempPiece != null)
             {
-                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King || tempPiece is Pawn) && (i - kingLoc.x == 1))))
+                if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King) && (i - kingLoc.x == 1))))
                 {
                     return true;
                 }
-                break;
-            }
-            if (j <= 0)
-            {
                 break;
             }
         }
         j = kingLoc.z + 1;
         for (int i = kingLoc.x - 1; i >= 0; i--, j++)
         {
+            if (j > 7)
+            {
+                break;
+            }
             ChessPiece tempPiece = tempLocations[i, j];
             Debug.Log(tempPiece + " at (" + i + "," + kingLoc.z + ")");
             if (tempPiece != null)
             {
-                Debug.Log("Here");
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King || tempPiece is Pawn) && (kingLoc.x - i == 1))))
                 {
                     return true;
                 }
                 break;
             }
-            if (j >= 7)
-            {
-                break;
-            }
         }
+
 
         return false;
     }
