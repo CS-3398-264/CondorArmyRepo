@@ -36,6 +36,10 @@ public abstract class ChessPiece : MonoBehaviour {
     }
 
     public void move(Coordinates moveTo) {
+        if (GameManager.pieceLocations[moveTo.x, moveTo.z] != null)
+        {
+            GameManager.DeactivateChildren(GameManager.pieceLocations[moveTo.x, moveTo.z].gameObject, false);
+        }
         gm.RemovePieceAt(currentPos);
         updatePosition(moveTo);
         gm.AddPieceAt(this, moveTo);
@@ -122,7 +126,7 @@ public abstract class ChessPiece : MonoBehaviour {
             }
             else
             {
-                kingLoc = new Coordinates(gm.team1_king.currentPos.x, gm.team1_king.currentPos.z);
+                kingLoc = new Coordinates(gm.team2_king.currentPos.x, gm.team2_king.currentPos.z);
             }
             ownTeam = "Team2";
             opponentTeam = "Team1";
@@ -138,6 +142,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (i-kingLoc.x == 1))))
                 {
+                    Debug.Log("Why1");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -150,6 +155,8 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (kingLoc.x - i == 1))))
                 {
+                    Debug.Log(tempPiece.currentPos);
+                    Debug.Log("Why2");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -162,6 +169,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (i - kingLoc.z == 1))))
                 {
+                    Debug.Log("Why3");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -174,6 +182,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (kingLoc.z - i == 1))))
                 {
+                    Debug.Log("Why4");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -192,6 +201,8 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King || tempPiece is Pawn) && (i - kingLoc.x == 1))))
                 {
+                    Debug.Log(tempPiece.currentPos);
+                    Debug.Log("Why5");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -209,6 +220,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King) && (kingLoc.x - i == 1))))
                 {
+                    Debug.Log("Why6");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -226,6 +238,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King) && (i - kingLoc.x == 1))))
                 {
+                    Debug.Log("Why7");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -244,6 +257,7 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King || tempPiece is Pawn) && (kingLoc.x - i == 1))))
                 {
+                    Debug.Log("Why8");
                     dangers.Add(tempPiece);
                 }
                 break;

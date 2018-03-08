@@ -99,19 +99,13 @@ public class GameManager : MonoBehaviour {
                         {
                             if (mm.selectedObject.GetComponent<Tile>().isHighlighted)
                             {
-                                if (pieceLocations[mm.selectedObject.GetComponent<Tile>().tilePosition.x, mm.selectedObject.GetComponent<Tile>().tilePosition.z] != null)
-                                {
-                                    DeactivateChildren(pieceLocations[mm.selectedObject.GetComponent<Tile>().tilePosition.x, mm.selectedObject.GetComponent<Tile>().tilePosition.z].gameObject, false);
-                                }
                                 currentObject.GetComponent<ChessPiece>().move(mm.selectedObject.GetComponent<Tile>().tilePosition);
                                 bm.ResetBoard();
                             }
                         }
                         if (mm.selectedObject.tag == "Team2" && bm.transform.GetChild((mm.selectedObject.GetComponent<ChessPiece>().currentPos.z * 8) + mm.selectedObject.GetComponent<ChessPiece>().currentPos.x).GetComponent<Tile>().isHighlighted == true)
                         {
-                            Coordinates tempPos = mm.selectedObject.GetComponent<ChessPiece>().currentPos;
-                            DeactivateChildren(pieceLocations[mm.selectedObject.GetComponent<ChessPiece>().currentPos.x, mm.selectedObject.GetComponent<ChessPiece>().currentPos.z].gameObject, false);
-                            currentObject.GetComponent<ChessPiece>().move(tempPos);
+                            currentObject.GetComponent<ChessPiece>().move(mm.selectedObject.GetComponent<ChessPiece>().currentPos);
                             bm.ResetBoard();
                         }
                     }
@@ -386,7 +380,7 @@ public class GameManager : MonoBehaviour {
         return (dangers.Count != 0);
     }
 
-    public void DeactivateChildren(GameObject g, bool a)
+    public static void DeactivateChildren(GameObject g, bool a)
     {
         g.SetActive(a);
 
