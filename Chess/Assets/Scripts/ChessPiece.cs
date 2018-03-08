@@ -122,7 +122,7 @@ public abstract class ChessPiece : MonoBehaviour {
             }
             else
             {
-                kingLoc = new Coordinates(gm.team1_king.currentPos.x, gm.team1_king.currentPos.z);
+                kingLoc = new Coordinates(gm.team2_king.currentPos.x, gm.team2_king.currentPos.z);
             }
             ownTeam = "Team2";
             opponentTeam = "Team1";
