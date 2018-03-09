@@ -50,9 +50,9 @@ public class Pawn : ChessPiece {
                         }
                     }
                 }
-                else if ((move == opt2) && (firstMove))
+                else if (move == opt2)
                 {
-                    if (GameManager.pieceLocations[coord.x, coord.z] == null)
+                    if (GameManager.pieceLocations[coord.x, coord.z] == null && (firstMove))
                     {
                         if (!isBlocked(coord, currentPos))
                         {
