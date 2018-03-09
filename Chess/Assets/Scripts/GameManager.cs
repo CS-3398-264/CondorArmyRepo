@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class GameManager : MonoBehaviour {
 
@@ -414,5 +415,7 @@ public class GameManager : MonoBehaviour {
             RemovePieceAt(g.GetComponent<ChessPiece>().currentPos);
             g.SetActive(a);
         }
+        else
+            throw new NullReferenceException();
     }
 }
