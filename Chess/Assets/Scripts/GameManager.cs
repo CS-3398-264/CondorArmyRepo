@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class GameManager : MonoBehaviour {
 
@@ -102,13 +103,10 @@ public class GameManager : MonoBehaviour {
                 {
                     if (currentObject.tag == "Team1")
                     {
-                        if (mm.selectedObject.tag == "Tile")
+                        if (mm.selectedObject.tag == "Tile" && mm.selectedObject.GetComponent<Tile>().isHighlighted)
                         {
-                            if (mm.selectedObject.GetComponent<Tile>().isHighlighted)
-                            {
-                                currentObject.GetComponent<ChessPiece>().move(mm.selectedObject.GetComponent<Tile>().tilePosition);
-                                bm.ResetBoard();
-                            }
+                            currentObject.GetComponent<ChessPiece>().move(mm.selectedObject.GetComponent<Tile>().tilePosition);
+                            bm.ResetBoard();
                         }
                         if (mm.selectedObject.tag == "Team2" && bm.transform.GetChild((mm.selectedObject.GetComponent<ChessPiece>().currentPos.z * 8) + mm.selectedObject.GetComponent<ChessPiece>().currentPos.x).GetComponent<Tile>().isHighlighted == true)
                         {
@@ -216,6 +214,7 @@ public class GameManager : MonoBehaviour {
     {
         List<ChessPiece> dangers = new List<ChessPiece>();
         List<Coordinates> allMoves = new List<Coordinates>();
+        ChessPiece ownKing;
         Coordinates kingLoc;
 
         foreach (ChessPiece piece in pieceLocations)
@@ -223,26 +222,20 @@ public class GameManager : MonoBehaviour {
             if ((piece != null) && (piece.gameObject.tag == king.gameObject.tag))
             {
                 allMoves.AddRange(piece.GetMoves(false));
-                Debug.Log("Location: " + piece.currentPos);
-                Debug.Log(allMoves.Count);
             }
-        }
-
-        foreach (Coordinates a in allMoves)
-        {
-            Debug.Log(a);
         }
 
         if (king.gameObject.tag == "Team1")
         {
-            kingLoc = new Coordinates(team1_king.currentPos.x, team1_king.currentPos.z);
-            dangers = team1_king.isCheck(team1_king.currentPos);
+            ownKing = team1_king;
         }
         else
         {
-            kingLoc = new Coordinates(team2_king.currentPos.x, team2_king.currentPos.z);
-            dangers = team2_king.isCheck(team2_king.currentPos);
+            ownKing = team2_king;
         }
+
+        kingLoc = new Coordinates(ownKing.currentPos.x, ownKing.currentPos.z);
+        dangers = ownKing.isCheck(ownKing.currentPos);
 
         if (dangers.Count != 0)
         {
@@ -250,7 +243,6 @@ public class GameManager : MonoBehaviour {
 
             foreach (ChessPiece badPiece in tempDangers)
             {
-                Debug.Log("Badd: "+badPiece.currentPos);
                 foreach (Coordinates move in allMoves)
                 {
                     if(move == badPiece.currentPos)
@@ -396,17 +388,34 @@ public class GameManager : MonoBehaviour {
                 }
             }
         }
-        return (dangers.Count != 0);
+
+        bool saveFlag = false;
+        if (dangers.Count != 0)
+        {
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int z = -1; z <=1; z++)
+                {
+                    Coordinates tempCoord = new Coordinates(x,z);
+                    if (ownKing.isCheck(kingLoc + tempCoord).Count == 0)
+                    {
+                        saveFlag = true;
+                    }
+                }
+            }
+        }
+
+        return (dangers.Count != 0 && !saveFlag);
     }
 
     public static void DeactivateChildren(GameObject g, bool a)
     {
-        RemovePieceAt(g.GetComponent<ChessPiece>().currentPos);
-        g.SetActive(a);
-
-        foreach (Transform child in g.transform)
+        if (g != null)
         {
-            DeactivateChildren(child.gameObject, a);
+            RemovePieceAt(g.GetComponent<ChessPiece>().currentPos);
+            g.SetActive(a);
         }
+        else
+            throw new NullReferenceException();
     }
 }

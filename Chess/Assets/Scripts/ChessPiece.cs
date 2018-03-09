@@ -40,8 +40,10 @@ public abstract class ChessPiece : MonoBehaviour {
     }
 
     public void move(Coordinates moveTo) {
+        Debug.Log("moveTo: " + moveTo);
         if (GameManager.pieceLocations[moveTo.x, moveTo.z] != null)
         {
+            Debug.Log("Remove called");
             GameManager.DeactivateChildren(GameManager.pieceLocations[moveTo.x, moveTo.z].gameObject, false);
         }
         GameManager.RemovePieceAt(currentPos);
@@ -65,6 +67,7 @@ public abstract class ChessPiece : MonoBehaviour {
 
 
         GameManager.ChangeTurns();
+        Debug.Log(GameManager.turn);
     }
 
     public bool isBlocked(Coordinates to, Coordinates from) {
@@ -109,6 +112,7 @@ public abstract class ChessPiece : MonoBehaviour {
     public List<ChessPiece> isCheck(Coordinates pos)
     {
         List<ChessPiece> dangers = new List<ChessPiece>();
+        Debug.Log("isCheck on: " + pos);
 
         ChessPiece[,] tempLocations = new ChessPiece[8, 8];
         for(int z = 0; z <= 7; z++)
@@ -127,7 +131,6 @@ public abstract class ChessPiece : MonoBehaviour {
             if (this is King)
             {
                 kingLoc = new Coordinates(pos.x, pos.z);
-                Debug.Log("KING: " + kingLoc);
             } else
             {
                 kingLoc = new Coordinates(gm.team1_king.currentPos.x, gm.team1_king.currentPos.z);
@@ -159,7 +162,6 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (i-kingLoc.x == 1))))
                 {
-                    Debug.Log("Why1");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -172,8 +174,6 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (kingLoc.x - i == 1))))
                 {
-                    Debug.Log(tempPiece.currentPos);
-                    Debug.Log("Why2");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -186,7 +186,6 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (i - kingLoc.z == 1))))
                 {
-                    Debug.Log("Why3");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -199,7 +198,6 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Queen || tempPiece is Rook || (tempPiece is King && (kingLoc.z - i == 1))))
                 {
-                    Debug.Log("Why4");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -218,8 +216,6 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King || tempPiece is Pawn) && (i - kingLoc.x == 1))))
                 {
-                    Debug.Log(tempPiece.currentPos);
-                    Debug.Log("Why5");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -237,7 +233,6 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King) && (kingLoc.x - i == 1))))
                 {
-                    Debug.Log("Why6");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -255,7 +250,6 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King) && (i - kingLoc.x == 1))))
                 {
-                    Debug.Log("Why7");
                     dangers.Add(tempPiece);
                 }
                 break;
@@ -274,7 +268,6 @@ public abstract class ChessPiece : MonoBehaviour {
             {
                 if (tempPiece.gameObject.tag == opponentTeam && (tempPiece is Bishop || tempPiece is Queen || ((tempPiece is King || tempPiece is Pawn) && (kingLoc.x - i == 1))))
                 {
-                    Debug.Log("Why8");
                     dangers.Add(tempPiece);
                 }
                 break;

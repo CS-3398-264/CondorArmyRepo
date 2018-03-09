@@ -39,7 +39,6 @@ public class Pawn : ChessPiece {
                     {
                         if (runCheckCheck)
                         {
-                            Debug.Log("Pawn: " + coord);
                             if (isCheck(coord).Count == 0)
                             {
                                 finalMoves.Add(coord);
@@ -51,9 +50,9 @@ public class Pawn : ChessPiece {
                         }
                     }
                 }
-                else if (move == opt2)
+                else if ((move == opt2) && (firstMove))
                 {
-                    if (firstMove)
+                    if (GameManager.pieceLocations[coord.x, coord.z] == null)
                     {
                         if (!isBlocked(coord, currentPos))
                         {
